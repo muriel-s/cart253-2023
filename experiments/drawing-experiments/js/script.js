@@ -13,23 +13,22 @@
 */
 function setup() {
     createCanvas(500,500);
-    background(200,200,200);
+    background(200);
     
-    ellipseMode(CENTER);
+angleMode(DEGREES);
     stroke('#0000ff');
     strokeWeight(3);
     fill(152, 251, 152);
     ellipse(250,250,100,100);
-
     stroke('#0000ff');
     strokeWeight(5);
     point(230,240);
     point(270,240);
-    strokeWeight(3);
+    noStroke();
     fill('#e53935');
-    arc(250, 260, 50, 40, 0, PI, CHORD);
+    arc(250, 260, 50, 50, 350, 170, CHORD);
     
-    ellipseMode(CENTER);
+angleMode(RADIANS);
     stroke('#0000ff');
     strokeWeight(3);
     fill(152, 251, 152);
@@ -42,11 +41,12 @@ function setup() {
     strokeWeight(5);
     point(385,290);
     point(415,290);
-    strokeWeight(3);
+    noStroke();
     fill('#e53935');
-    arc(400, 330, 40, 40, PI, 0, CHORD)
+    arc(400, 325, 40, 30, PI, 0, CHORD);
 
     stroke('#000000');
+    strokeWeight(2);
     fill(255,205,0);
     beginShape();
     vertex(128,90);
