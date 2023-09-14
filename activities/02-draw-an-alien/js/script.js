@@ -16,7 +16,7 @@ function preload() {
 
 
 /**
- * Description of setup
+ * Draws a chicken on a canvas.
 */
 function setup() {
     //draws background
@@ -73,12 +73,12 @@ function setup() {
     triangle(152,150, 125,165, 156,170);
 
     //draws the crown thing
-    fill(220);
+    fill("#b54214");
     beginShape();
     vertex(180,110); //first anchor point
     bezierVertex(175,60, 215,60, 210,90); //second anchor point
     bezierVertex(225,75, 245,85, 235,105); //third anchor point
-    bezierVertex(250,95, 280,110, 240,135); //fourth anchor point
+    bezierVertex(250,95, 280,110, 238,135); //fourth anchor point
     endShape(CLOSE);
 
     //draws the head of the alien
@@ -94,10 +94,10 @@ function setup() {
     //draws the neck of the alien
     noStroke();
     beginShape();
-    vertex(238,137); //first anchor point
-    bezierVertex(245,150,270,165,290,166);
-    vertex(222,250);
-    bezierVertex(220,230,210,195,185,193);
+    vertex(238,136); //first anchor point
+    bezierVertex(245,150, 270,160, 294,166);
+    vertex(221,250);
+    bezierVertex(218,230, 210,196, 185,194);
     endShape(CLOSE);
 
 
