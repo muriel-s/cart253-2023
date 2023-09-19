@@ -9,9 +9,13 @@
 "use strict";
 
 let backgroundShade = 0;
-let circleX = 250;
-let circleY = 250;
-let circleSize = 200;
+
+let circle = {
+    x: 250,
+    y: 250,
+    size: 200,
+    speed: 1.01
+};
 
 /**
  * Description of setup
@@ -25,9 +29,12 @@ function setup() {
  * Description of draw()
 */
 function draw() {
-    background(backgroundShade);
-    ellipse(circleX, circleY, circleSize*2);
-    ellipse(circleX, circleY, circleSize*1.5);
-    ellipse(circleX, circleY, circleSize);
-    ellipse(circleX, circleY, circleSize/2);
+    // background(backgroundShade);
+    noFill();
+    circle.size *= circle.speed;
+    circle.y /= circle.speed;
+    ellipse(circle.x, circle.y, circle.size*2);
+    ellipse(circle.x, circle.y, circle.size*1.5);
+    ellipse(circle.x, circle.y, circle.size);
+    ellipse(circle.x, circle.y, circle.size/2);
 }
