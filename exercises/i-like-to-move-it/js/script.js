@@ -3,13 +3,14 @@
  * Muriel
  * 
  * a pigeon walks across an endless sidewalk. days and nights pass, but he keeps putting one foot in front of the other.
- * move the mouse up and down to make the sun rise and set around him, or move left to right to see his weight shift from one leg to the other.
+ * move the cursor up and down to make the sun rise and set around him, or move the cursor left to right to see his weight shift from one leg to the other.
  */
 
 "use strict";
 
 let sky = {
     hue: 210,
+    saturation: 75,
     brightness: 75,
     nightHue: 250,
     nightBrightness: 25,
@@ -17,8 +18,21 @@ let sky = {
     daytimeBrightness: 85
 }
 
-let sidewalkBrightness;
-let pigeonBrightness;
+let sidewalk = {
+    hue: 0,
+    saturation: 0,
+    brightness: 20,
+    lowBrightness: 20,
+    highBrightness: 50
+}
+
+let pigeonColor = {
+    hue: 260,
+    saturation: 5,
+    brightness: 20,
+    lowBrightness: 20,
+    highBrightness: 75
+}
 
 let sun = {
     x: -50,
@@ -41,9 +55,15 @@ let pigeon = {
     height: 124
 }; 
 
-let leg1Position = pigeon.x-pigeon.width/4;
-let leg2Position = pigeon.x+pigeon.width/4;
+let orange = {
+    hue: 30,
+    saturation: 90,
+    brightness: 20
+}
 
+let foot1Position = pigeon.x-pigeon.width/4;
+let foot2Position = pigeon.x+pigeon.width/4;
+let legsSpeed = 2;
 
 /**
  * Creates the canvas.
@@ -55,31 +75,34 @@ function setup() {
 
 
 /**
- * Description of draw()
+ * Creates the sky, sidewalk, sun, and bird.
 */
 function draw() {
+    
     // draws sky
-    sky.brightness = map(mouseY, 0, height, sky.nightBrightness, sky.daytimeHue, true);
-    sky.hue = map(mouseY, 0, height, sky.nightHue, sky.daytimeHue, true);
-    background(sky.hue, 75, sky.brightness);
+    sky.brightness = map(mouseY, height, 0, sky.nightBrightness, sky.daytimeHue, true);
+    sky.hue = map(mouseY, height, 0, sky.nightHue, sky.daytimeHue, true);
+    background(sky.hue, sky.saturation, sky.brightness);
 
     // draws sun
     sun.x += sun.speed;
-    if (sun.x > 550) {
+
+    if (sun.x > width+50) {
         sun.x = -50;
     }
-    sun.y = height - mouseY;
+
+    sun.y = 0 + mouseY;
     sun.y = constrain(sun.y, -15, 375);
-    sun.size = map(mouseY, -15, 375, 45, 60, true);
-    sun.hue = map(mouseY, 0, 400, 20, 50, true);
-    sun.brightness = map(mouseY, 0, 400, 55, 85, true);
+    sun.size = map(mouseY, -15, 375, 60, 45, true);
+    sun.hue = map(mouseY, 0, 400, 50, 20, true);
+    sun.brightness = map(mouseY, 0, 400, 85, 55, true);
     fill(sun.hue, 95, sun.brightness);
     noStroke();
     ellipse(sun.x, sun.y, sun.size);
     
     // draws sidewalk
-    sidewalkBrightness = map(mouseY, 0, height, 20, 50, true);
-    fill(0, 0, sidewalkBrightness);
+    sidewalk.brightness = map(mouseY, height, 0, sidewalk.lowBrightness, sidewalk.highBrightness, true);
+    fill(sidewalk.hue, sidewalk.saturation, sidewalk.brightness);
     rect(0, height/2 + height/4, width, height/4);
 
     // sets pigeon's size variations
@@ -89,29 +112,40 @@ function draw() {
     pigeon.height = map(mouseX, 0, width, 124, 129);
 
     // draws pigeon's beak
-    pigeonBrightness = map(mouseY, 0, height, 25, 60, true);
-    fill(30, 90, pigeonBrightness);
+    pigeonColor.brightness = map(mouseY, height, 0, pigeonColor.lowBrightness, pigeonColor.highBrightness, true);
+    fill(orange.hue, orange.saturation, pigeonColor.brightness);
     triangle(pigeon.x-pigeon.width/1.75, pigeon.y-pigeon.height/2, pigeon.x-pigeon.width/1.75, pigeon.y-pigeon.height/2.75, pigeon.x-pigeon.width/1.125, pigeon.y-pigeon.height/2.45);
+    
     // draws pigeon's body
-    fill(260, 5, pigeonBrightness);
+    fill(pigeonColor.hue, pigeonColor.saturation, pigeonColor.brightness);
     ellipse(pigeon.x, pigeon.y, pigeon.width, pigeon.height);
+    
     // draws pigeon's head
     ellipse(pigeon.x-pigeon.width/2, pigeon.y-pigeon.height/2, 65);
+    
     // draws pigeon's eye
     fill(0);
     ellipse(pigeon.x-pigeon.width/1.75, pigeon.y-pigeon.height/2, 5);
+
+    // each leg moves from start position to end, then immediately returns
+    // with both legs identical, this gives the appearance of a walk cycle
+
+    // sets movement for backwards-moving leg
+    foot1Position += legsSpeed
+    if (foot1Position > pigeon.x+pigeon.width/4) {
+        foot1Position = pigeon.x-pigeon.width/4;
+    }
+    
+    // sets movement for forwards-moving leg
+    foot2Position -= legsSpeed
+    if (foot2Position < pigeon.x-pigeon.width/4) {
+        foot2Position = pigeon.x+pigeon.width/4;
+    }
+    
     // draws legs
-    stroke(30, 90, pigeonBrightness);
+    stroke(orange.hue, orange.saturation, pigeonColor.brightness);
     strokeWeight(5);
-    leg1Position += 2
-    if (leg1Position > pigeon.x+pigeon.width/4) {
-        leg1Position = pigeon.x-pigeon.width/4;
-    }
-    leg2Position -= 2
-    if (leg2Position < pigeon.x-pigeon.width/4) {
-        leg2Position = pigeon.x+pigeon.width/4;
-    }
-    line(legsAnchorPoint.x, legsAnchorPoint.y, leg2Position, 374); // leg 2
-    line(legsAnchorPoint.x, legsAnchorPoint.y, leg1Position, 374); // leg 1
+    line(legsAnchorPoint.x, legsAnchorPoint.y, foot1Position, 374); // leg 1
+    line(legsAnchorPoint.x, legsAnchorPoint.y, foot2Position, 374); // leg 2
 
 }
