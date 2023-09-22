@@ -22,8 +22,8 @@ let pigeonBrightness;
 
 let sun = {
     x: -50,
-    y: 500,
-    speed: 0.75,
+    y: 375,
+    speed: 1,
     size: 45,
     hue: 20,
     brightness: 35
@@ -69,8 +69,8 @@ function draw() {
         sun.x = -50;
     }
     sun.y = height - mouseY;
-    sun.y = constrain(sun.y, -50, 375);
-    sun.size = map(mouseY, -40, 375, 45, 60, true);
+    sun.y = constrain(sun.y, -15, 375);
+    sun.size = map(mouseY, -15, 375, 45, 60, true);
     sun.hue = map(mouseY, 0, 400, 20, 50, true);
     sun.brightness = map(mouseY, 0, 400, 55, 85, true);
     fill(sun.hue, 95, sun.brightness);
