@@ -8,54 +8,78 @@
 
 "use strict";
 
-let covid19 = {
+let anteater = {
     x: 0,
     y: 250,
-    size: 100,
+    width: 781,
+    height: 364,
     vx: 0,
-    vy: 0,
-    speed: 100,
+    speed: 70,
+    speedIncrease: 20
 };
 
-let covid19Fill = {
-    r: 255,
-    g: 50,
-    b: 50
-};
-
-let user = {
+let termite = {
     x: 0,
     y: 0,
-    size: 200,
+    width: 250,
+    height: 115,
     fill: 255,
     vx: 0,
     vy: 0,
+    maxSpeed: 50,
     ax: 0,
     ay: 0,
-    acceleration: 0
+    acceleration: 10
+};
+
+let stopwatch = {
+    textX: 200,
+    textY: 200,
+    textSize: 56,
+    textFill: 0,
+    fill: 240,
+    x: 150,
+    y: 120,
+    width: 250,
+    height: 220
+};
+
+let scoreboard = {
+    textX: 700,
+    textY: 200,
+    textSize: 56,
+    textFill: 0,
+    fill: 240,
+    x: 650,
+    y: 120,
+    width: 250,
+    height: 220
 };
 
 let staticAmount = 5000;
 
+let anteaterImg;
+let termiteImg;
 
+let score = 0;
 
 function preload() {
-
+    anteaterImg = loadImage('assets/images/anteater.png');
+    termiteImg = loadImage('assets/images/termite.png');
 }
-
 
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
 
-    covid19.y = random(0, height);
-    covid19.vx = covid19.speed;
+    // starts the anteater at random height, avoiding the stopwatch
+    anteater.y = random(2*stopwatch.height, height - anteater.height/2);
+    // anteater.vx = anteater.speed;
 }
 
 
-
 function draw() {
-    background(0);
+    background(200);
 
     // draws static
     for (let i = 0; i < staticAmount ; i++) {
@@ -66,30 +90,88 @@ function draw() {
         point(x, y);
     }
 
-    user.x = mouseX;
-    user.y = mouseY;
+    // draws box around stopwatch
+    fill(stopwatch.fill);
+    rectMode(CORNER);
+    rect(stopwatch.x, stopwatch.y, stopwatch.width, stopwatch.height);
 
-    // sets covid19 movement to right
-    covid19.x = covid19.x + covid19.vx;
+    // draws box around scoreboard
+    fill(scoreboard.fill);
+    rectMode(CORNER);
+    rect(scoreboard.x, scoreboard.y, scoreboard.width, scoreboard.height);
 
-    // resets covid19 to left
-    if (covid19.x > width) {
-        covid19.x = 0;
-        covid19.y = random(0, height);
+    // draws stopwatch
+    let time = round(millis()/1000);
+    noStroke();
+    fill(stopwatch.textFill);
+    textSize(stopwatch.textSize); 
+    textFont('Verdana');
+    text('Time: \n' + time, stopwatch.textX, stopwatch.textY);
+
+    // draws scoreboard
+    noStroke();
+    fill(scoreboard.textFill);
+    textSize(scoreboard.textSize); 
+    textFont('Verdana');
+    text('Score: \n' + score, scoreboard.textX, scoreboard.textY);
+
+    // sets termite's speed in following the mouse
+    if (mouseX > termite.x) {
+        termite.ax = termite.acceleration;
+    }
+    else if (mouseX < termite.x) {
+        termite.ax = -termite.acceleration;
+    }
+    if (mouseY > termite.y) {
+        termite.ay = termite.acceleration;
+    }
+    else if (mouseY < termite.y) {
+        termite.ay = -termite.acceleration;
+    }
+
+    // constrains the termite's speed in following the mouse
+    termite.vx = termite.vx + termite.ax;
+    termite.vx = constrain(termite.vx, -termite.maxSpeed, termite.maxSpeed);
+    termite.vy = termite.vy + termite.ay;
+    termite.vy = constrain(termite.vy, -termite.maxSpeed, termite.maxSpeed);
+
+    // sets the termite in motion
+    termite.x = termite.x + termite.vx;
+    termite.y = termite.y + termite.vy;
+
+    // sets anteater moving to the right
+    anteater.x = anteater.x + anteater.speed;
+
+    // makes anteater faster when score hits multiples of 10
+    if (score <= 10) {
+        anteater.speed = 70;
+    }
+    else if (score > 10 && score <= 20) {
+        anteater.speed = 90;
+    }
+    else if (score > 20 && score <= 30) {
+        anteater.speed = 110;
+    }
+    else {
+        anteater.speed = 130;
     };
 
-    // draws covid19
-    fill(covid19Fill.r, covid19Fill.g, covid19Fill.b);
-    noStroke();
-    ellipse(covid19.x, covid19.y, covid19.size);
+    // resets anteater back to far left
+    if (anteater.x > width + anteater.width/2) {
+        anteater.x = -anteater.width/2;
+        anteater.y = random(2*stopwatch.height, height - anteater.height/2);
+        score++;
+    };
 
-    // draws user
-    fill(user.fill);
-    ellipse(user.x, user.y, user.size);
+    // draws anteater
+    image(anteaterImg, anteater.x, anteater.y, anteater.width, anteater.height);
 
-    // stops the loop when user & covid19 touch
-    let d = dist(user.x, user.y, covid19.x, covid19.y);
-    if (d < covid19.size/2 + user.size/2) {
+    // draws termite
+    image(termiteImg, termite.x, termite.y, termite.width, termite.height);
+
+    // stops the loop when termite & anteater touch
+    let d = dist(termite.x, termite.y, anteater.x, anteater.y);
+    if (d < anteater.width/2 + termite.width/2 && d < anteater.height/2 + termite.height/2) {
         noLoop();
     };
 }
