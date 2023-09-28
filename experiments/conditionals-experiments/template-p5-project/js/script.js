@@ -1,9 +1,9 @@
 /**
- * Title of Project
- * Author Name
+ * Conditionals experiments
+ * Muriel Smith
  * 
- * This is a template. You must fill in the title, author, 
- * and this description to match your project!
+ * This is my coding experimentation
+ * file while I learn about conditionals.
  */
 
 "use strict";
@@ -14,30 +14,33 @@ let caterpillar = {
     segmentSize: 50
 }
 
-/**
- * Description of setup
-*/
+
 function setup() {
     createCanvas(500, 500);
 }
 
 
-/**
- * Description of draw()
-*/
 function draw() {
     background(0);
     noStroke();
     fill(100,200,100);
 
-    let x = caterpillar.x;
-    let numSegments = 5;
-    let segmentsDrawn = 0;
+    // let x = caterpillar.x;
+    // let numSegments = 5;
+    // let segmentsDrawn = 0;
 
-    while (segmentsDrawn < numSegments) {
+    // while (segmentsDrawn < numSegments) {
+    //     ellipse(x, caterpillar.y, caterpillar.segmentSize);
+    //     x = x + 40;
+    //     segmentsDrawn++;
+    // }
+
+    let x = caterpillar.x;
+    let numSegments = 10;
+
+    for (let segmentsDrawn = 0; segmentsDrawn < numSegments; segmentsDrawn++) {
         ellipse(x, caterpillar.y, caterpillar.segmentSize);
-        x = x + 40;
-        segmentsDrawn += 1;
+        x = x+ 40;
     }
 
 }
