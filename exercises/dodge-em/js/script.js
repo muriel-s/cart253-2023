@@ -2,8 +2,11 @@
  * Dodge em
  * Muriel
  * 
- * This is a template. You must fill in the title, author, 
- * and this description to match your project!
+ * Note: I coded this on my laptop, which has a 4k resolution screen.
+ * When I opened the link on my dad's computer it played horribly because
+ * of how giant all the elements were! So, please note that my game is
+ * unplayable on standard resolution screens. Sorry and I will note this
+ * for next time.
  */
 
 "use strict";
@@ -156,7 +159,7 @@ function draw() {
         anteater.speed = 130;
     };
 
-    // resets anteater back to far left
+    // resets anteater back to far left, increasing the score each time
     if (anteater.x > width + anteater.width/2) {
         anteater.x = -anteater.width/2;
         anteater.y = random(2*stopwatch.height, height - anteater.height/2);
