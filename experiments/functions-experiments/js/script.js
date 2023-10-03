@@ -7,14 +7,6 @@
 
 "use strict";
 
-let circle = {
-    x: 0,
-    y: 250,
-    size: 100,
-    vx: 5,
-    vy: 0,
-    hue: 1,
-}
 
 /**
  * Description of preload
@@ -29,7 +21,6 @@ function preload() {
 */
 function setup() {
     createCanvas(500,500);
-    colorMode(HSB);
 }
 
 
@@ -39,39 +30,19 @@ function setup() {
 function draw() {
     background(0);
 
-    move();
-    wrap();
-    display();
+    // parallels(300, 50, 20, 1, 50, 10);
+    // parallels(200, 150, 4, 2, 100, 20);
+    // parallels(100, 250, 10, 3, 20, 30);
+    parallels(random(100, 300),random(50, 250), random(4, 20), random(1,3), random(20, 100), random(10, 30));
 }
 
 
-function move() {
-    circle.x = circle.x + circle.vx;
-    circle.y = circle.y + circle.vy;
-}
-
-
-function wrap() {
-    if (circle.x > width) {
-        reset();
+function parallels(x, y, numLines, lineWidth, lineHeight, lineSpacing) {
+    for (let i = 0; i < numLines; i++) {
+        noStroke();
+        fill(255);
+        rectMode(CENTER);
+        rect(x, y, lineWidth, lineHeight);
+        x = x + lineSpacing; 
     }
-}
-
-
-function display() {
-    fill(circle.hue, 80, 80);
-    ellipse(circle.x, circle.y, circle.size);
-}
-
-
-function reset() {
-    circle.x = 0;
-    circle.hue ++;
-    circle.vx = circle.vx + 1;
-    circle.size = circle.size ++;
-}
-
-
-function mousePressed() {
-    reset();
 }
