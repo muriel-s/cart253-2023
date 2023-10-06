@@ -139,6 +139,9 @@ let partner = undefined;
 let genre = undefined;
 let watchedOrNot = undefined;
 
+let partnerOffscreen = 0;
+let genreOffscreen = 0;
+let watchedOffscreen = 0;
 let objectsOffscreen = 0;
 
 /**
@@ -169,9 +172,9 @@ function draw() {
     else if (state === `ending`) {
         ending();
     }
-    else if (state === `special ending`) {
-        // specialEnding();
-    };
+    // else if (state === `special ending`) {
+    //     // specialEnding();
+    // };
 }
 
 // contains title display & actions
@@ -183,7 +186,7 @@ function title() {
 
     textSize(16);
     textAlign(CENTER, TOP);
-    text(`\nclick to begin`, width/2, height/2);
+    text(`\npop the bubbles until one of each color is left \n\n\nclick to begin`, width/2, height/2);
 }
 
 // changes state from title to simulation
@@ -319,12 +322,12 @@ function isOffscreen(circle) {
 // moves objects offscreen if they come in contact with the user,
 // EXCEPT if they are the last of their group
 function checkOverlap(circle, other, other2=0, other3=0, other4=0, other5=0, other6=0, other7=0) {
-    let d = dist(circle.x, circle.y, user.x, user.y);
+    let d = dist(circle.x, circle.y, user.x, user.y); // IF the user touches the object, AND any of the other objects in the parameters are also onscreen,
     if (d < circle.size/2 + user.size/2 && (isOnscreen(other) || isOnscreen(other2) || isOnscreen(other3) || isOnscreen(other4) || isOnscreen(other5) || isOnscreen(other6) || isOnscreen(other7))) {
-        circle.x = 700;
+        circle.x = 700; // THEN the object gets moved offscreen
         circle.y = 700;
-        circle.onscreen = false;
-        objectsOffscreen++;
+        circle.onscreen = false; // AND its `onscreen` property gets set to false
+        objectsOffscreen++; // AND we add 1 to the counter of total objects offscreen.
         console.log(objectsOffscreen)
     }
 }
@@ -355,55 +358,92 @@ function endSimulation() {
 // contains ending actions
 function ending() {
     checkWinners();
+    endingGraphic();
     resultText();
 }
 
-// checks which object from each group is left on screen at the end
+// checks which object from each group is left on screen at the end, and keeps its circle in place during `ending` state
 function checkWinners() {
+    push();
+    fill(80, 80, 255, 100);
     if (partner1.onscreen) {
         partner = `Jacob`;
+        ellipse(partner1.x, partner1.y, partner1.size);
     } 
     else if (partner2.onscreen) {
         partner = `Muriel`;
+        ellipse(partner2.x, partner2.y, partner2.size);
     }
+    pop();
 
+    push();
+    fill(255, 80, 80, 100);
     if (genre1.onscreen) {
         genre = `horror`
+        ellipse(genre1.x, genre1.y, genre1.size);
     }
     else if (genre2.onscreen) {
         genre = `comedy`;
+        ellipse(genre2.x, genre2.y, genre2.size);
     }
     else if (genre3.onscreen) {
         genre = `drama`;
+        ellipse(genre3.x, genre3.y, genre3.size);
     }
     else if (genre4.onscreen) {
         genre = `thriller`;
+        ellipse(genre4.x, genre4.y, genre4.size);
     }
     else if (genre5.onscreen) {
         genre = `romance`;
+        ellipse(genre5.x, genre5.y, genre5.size);
     }
     else if (genre6.onscreen) {
         genre = `sci fi`;
+        ellipse(genre6.x, genre6.y, genre6.size);
     }
     else if (genre7.onscreen) {
         genre = `fantasy`;
+        ellipse(genre7.x, genre7.y, genre7.size);
     }
     else if (genre8.onscreen) {
         genre = `nonfiction`;
+        ellipse(genre8.x, genre8.y, genre8.size);
     }
+    pop();
 
+    push();
+    fill(80, 255, 80, 100);
     if (watched.onscreen) {
-        watchedOrNot = `already watched`;
+        watchedOrNot = `have already`;
+        ellipse(watched.x, watched.y, watched.size);
     } 
     else if (notWatched.onscreen) {
-        watchedOrNot = `not watched yet`;
+        watchedOrNot = `haven't yet`;
+        ellipse(notWatched.x, notWatched.y, notWatched.size);
     }
+    pop();
+}
+
+// places colorful circles behind the ending text to show what each color represented
+function endingGraphic() {
+    // blue circle behind name
+    fill(80, 80, 255, 100);
+    ellipse(142, 178, 175);
+
+    // red circle behind genre
+    fill(255, 80, 80, 100);
+    ellipse(170, height/2, 175);
+
+    // green circle behind watched/not watched
+    fill(30, 200, 30, 100);
+    ellipse(305, 420, 175)
 }
 
 // displays the result of the text in `ending`
 function resultText() {
-    textSize(16);
+    textSize(32);
     fill(255);
-    textAlign(LEFT, BOTTOM);
-    text(`${partner} gets to choose \na ${genre} movie \nthat they have ${watchedOrNot}!`, width/3, height/2);
+    textAlign(LEFT, CENTER);
+    text(`${partner} gets to choose \n\n\na ${genre} movie \n\n\nthat they ${watchedOrNot} watched!`, width/6, height/2);
 }
