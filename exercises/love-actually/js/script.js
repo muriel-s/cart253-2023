@@ -39,7 +39,8 @@ let genre1 = {
     vx: 0,
     vy: 0,
     speed: 5,
-    string: `horror`
+    string: `horror`,
+    onscreen: true
 };
 let genre2 = {
     x: 100,
@@ -48,7 +49,8 @@ let genre2 = {
     vx: 0,
     vy: 0,
     speed: 5,
-    string: `comedy`
+    string: `comedy`,
+    onscreen: true
 };
 let genre3 = {
     x: 500,
@@ -57,7 +59,8 @@ let genre3 = {
     vx: 0,
     vy: 0,
     speed: 5,
-    string: `drama`
+    string: `drama`,
+    onscreen: true
 };
 let genre4 = {
     x: 500,
@@ -66,7 +69,8 @@ let genre4 = {
     vx: 0,
     vy: 0,
     speed: 5,
-    string: `thriller`
+    string: `thriller`,
+    onscreen: true
 };
 let genre5 = {
     x: 150,
@@ -75,7 +79,8 @@ let genre5 = {
     vx: 0,
     vy: 0,
     speed: 5,
-    string: `romance`
+    string: `romance`,
+    onscreen: true
 };
 let genre6 = {
     x: 150,
@@ -84,7 +89,8 @@ let genre6 = {
     vx: 0,
     vy: 0,
     speed: 5,
-    string: `sci fi`
+    string: `sci fi`,
+    onscreen: true
 };
 let genre7 = {
     x: 450,
@@ -93,7 +99,8 @@ let genre7 = {
     vx: 0,
     vy: 0,
     speed: 5,
-    string: `fantasy`
+    string: `fantasy`,
+    onscreen: true
 };
 let genre8 = {
     x: 450,
@@ -102,7 +109,8 @@ let genre8 = {
     vx: 0,
     vy: 0,
     speed: 5,
-    string: `nonfiction`
+    string: `nonfiction`,
+    onscreen: true
 };
 let watched = {
     x: 245,
@@ -111,7 +119,8 @@ let watched = {
     vx: 0,
     vy: 0,
     speed: 5,
-    string: `already watched`
+    string: `already watched`,
+    onscreen: true
 };
 let notWatched = {
     x: 355,
@@ -120,10 +129,17 @@ let notWatched = {
     vx: 0,
     vy: 0,
     speed: 5,
-    string: `not watched`
+    string: `not watched`,
+    onscreen: true
 };
 
 let state = `title`;
+
+let partner = undefined;
+let genre = undefined;
+let watchedOrNot = undefined;
+
+let objectsOffscreen = 0;
 
 /**
  * SETUP
@@ -151,7 +167,7 @@ function draw() {
         simulation();
     }
     else if (state === `ending`) {
-        // ending();
+        ending();
     }
     else if (state === `special ending`) {
         // specialEnding();
@@ -184,6 +200,7 @@ function simulation() {
     deleteTouchedCircles();
     displayCircles();
     displayUser();
+    endSimulation();
 }
 
 // writes the direction of objects
@@ -287,17 +304,6 @@ function displayUser() {
     ellipse(user.x, user.y, user.size);
 }
 
-// moves objects offscreen if they come in contact with the user,
-// EXCEPT if they are the last of their group
-function checkOverlap(circle, other, other2=0, other3=0, other4=0, other5=0, other6=0, other7=0) {
-    let d = dist(circle.x, circle.y, user.x, user.y);
-    if (d < circle.size/2 + user.size/2 && (isOnscreen(other) || isOnscreen(other2) || isOnscreen(other3) || isOnscreen(other4) || isOnscreen(other5) || isOnscreen(other6) || isOnscreen(other7))) {
-        circle.x = 700;
-        circle.y = 700;
-        circle.onscreen = false;
-    }
-}
-
 // checks if an object is within canvas borders
 function isOnscreen(circle) {
     let result = (circle.x > 0 && circle.x < width && circle.y > 0 && circle.y < height);
@@ -310,7 +316,20 @@ function isOffscreen(circle) {
     return result;
 }
 
-// sets the circles to move offscreen if they come in contct with user
+// moves objects offscreen if they come in contact with the user,
+// EXCEPT if they are the last of their group
+function checkOverlap(circle, other, other2=0, other3=0, other4=0, other5=0, other6=0, other7=0) {
+    let d = dist(circle.x, circle.y, user.x, user.y);
+    if (d < circle.size/2 + user.size/2 && (isOnscreen(other) || isOnscreen(other2) || isOnscreen(other3) || isOnscreen(other4) || isOnscreen(other5) || isOnscreen(other6) || isOnscreen(other7))) {
+        circle.x = 700;
+        circle.y = 700;
+        circle.onscreen = false;
+        objectsOffscreen++;
+        console.log(objectsOffscreen)
+    }
+}
+
+// sets the circles to move offscreen if they come in contact with user
 function deleteTouchedCircles() {
     checkOverlap(partner1, partner2);
     checkOverlap(partner2, partner1);
@@ -326,58 +345,65 @@ function deleteTouchedCircles() {
     checkOverlap(notWatched, watched);
 }
 
-// checks which object from each group is left on screen at the end
-function checkWinners(circle, other, other2=0, other3=0, other4=0, other5=0, other6=0, other7=0) {
-    if (d < circle.size/2 + user.size/2 && (isOffscreen(other) && isOffscreen(other2) && isOffscreen(other3) && isOffscreen(other4) && isOffscreen(other5) && isOffscreen(other6) && isOffscreen(other7))) {
-        let partner;
-    
-        if (partner1.onscreen) {
-            partner1 = partner;
-        } 
-        else if (partner2.onscreen) {
-            partner2 = partner;
-        }
-    
-        let genre;
-        if (genre1.onscreen) {
-            genre1 = genre;
-        }
-        else if (genre2.onscreen) {
-            genre2 = genre;
-        }
-        else if (genre3.onscreen) {
-            genre3 = genre;
-        }
-        else if (genre4.onscreen) {
-            genre4 = genre;
-        }
-        else if (genre5.onscreen) {
-            genre5 = genre;
-        }
-        else if (genre6.onscreen) {
-            genre6 = genre;
-        }
-        else if (genre7.onscreen) {
-            genre7 = genre;
-        }
-        else if (genre8.onscreen) {
-            genre8 = genre;
-        }
-    
-        let watchedOrNot;
-        if (watched.onscreen) {
-            watched = watchedOrNot;
-        } 
-        else if (notWatched.onscreen) {
-            notWatched = watchedOrNot;
-        }
+// checks if 9 out of the 12 objects are offscreen, sends state to ending
+function endSimulation() {
+    if (objectsOffscreen === 9) {
+        state = `ending`;
     }
-    state = `ending`;
 }
 
+// contains ending actions
 function ending() {
-    textSize(32);
+    checkWinners();
+    resultText();
+}
+
+// checks which object from each group is left on screen at the end
+function checkWinners() {
+    if (partner1.onscreen) {
+        partner = `Jacob`;
+    } 
+    else if (partner2.onscreen) {
+        partner = `Muriel`;
+    }
+
+    if (genre1.onscreen) {
+        genre = `horror`
+    }
+    else if (genre2.onscreen) {
+        genre = `comedy`;
+    }
+    else if (genre3.onscreen) {
+        genre = `drama`;
+    }
+    else if (genre4.onscreen) {
+        genre = `thriller`;
+    }
+    else if (genre5.onscreen) {
+        genre = `romance`;
+    }
+    else if (genre6.onscreen) {
+        genre = `sci fi`;
+    }
+    else if (genre7.onscreen) {
+        genre = `fantasy`;
+    }
+    else if (genre8.onscreen) {
+        genre = `nonfiction`;
+    }
+
+    if (watched.onscreen) {
+        watchedOrNot = `already watched`;
+    } 
+    else if (notWatched.onscreen) {
+        watchedOrNot = `not watched yet`;
+    }
+}
+
+// displays the result of the text in `ending`
+function resultText() {
+    textSize(16);
     fill(255);
-    textAlign(CENTER, BOTTOM);
-    text(`${partner.string} gets to choose a ${genre.string} movie that they have ${watchedOrNot.string}!`, width/2, height/2);
+    textAlign(LEFT, BOTTOM);
+    text(`${partner} gets to choose \na ${genre} movie \nthat they have ${watchedOrNot}!`, width/3, height/2);
 }
