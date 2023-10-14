@@ -10,27 +10,27 @@
 let user = {
     x: undefined,
     y: undefined,
-    size: 100,
+    size: 20,
 };
 
 let targetColorBox = {
     x: 250,
-    y: 150,
+    y: 125,
     width: 300,
-    height: 200,
+    height: 150,
 }
 
 let targetColor = {
     r: undefined,
     g: undefined,
-    b: undefined
+    b: undefined,
 }
 
 let userColorBox = {
     x: 750,
-    y: 150,
+    y: 125,
     width: 300,
-    height: 200,
+    height: 150,
 }
 
 let userColor = {
@@ -46,20 +46,23 @@ let gameArea = {
     bottomWall: 950,
 }
 
-let number5points = 15;
-let red5points = [];
-let green5points = [];
-let blue5points = [];
+// these are the targets worth 5 points
+let smallCirclesNumber = 15;
+let redSmallCircles = [];
+let greenSmallCircles = [];
+let blueSmallCircles = [];
 
-let number10points = 10;
-let red10points = [];
-let green10points = [];
-let blue10points = [];
+// these are the targets worth 10 points
+let mediumCirclesNumber = 10;
+let redMediumCircles = [];
+let greenMediumCircles = [];
+let blueMediumCircles = [];
 
-let number20points = 4;
-let red20points = [];
-let green20points = [];
-let blue20points = [];
+// these are the targets worth 20 points
+let bigCirclesNumber = 4;
+let redBigCircles = [];
+let greenBigCircles = [];
+let blueBigCircles = [];
 
 /**
  * Description of setup
@@ -68,109 +71,216 @@ function setup() {
     createCanvas(1000,1000);
     background(0);
 
-    // create the red5 circles
-    for (let i = 0; i < number5points; i++) {
-        red5points[i] = createRed5(random(gameArea.leftWall, gameArea.rightWall), random(gameArea.topWall, gameArea.bottomWall));
-    }
-
-    // create the red10 circles
-    for (let i = 0; i < number10points; i++) {
-        red10points[i] = createRed10(random(gameArea.leftWall, gameArea.rightWall), random(gameArea.topWall, gameArea.bottomWall));
-    }
-
-    // create the green5 circles
-    for (let i = 0; i < number5points; i++) {
-        green5points[i] = createGreen5(random(gameArea.leftWall, gameArea.rightWall), random(gameArea.topWall, gameArea.bottomWall));
-    }
-
-    // create the blue5 circles
-    for (let i = 0; i < number5points; i++) {
-        blue5points[i] = createBlue5(random(gameArea.leftWall, gameArea.rightWall), random(gameArea.topWall, gameArea.bottomWall));
-    }
-}
-
-function createRed5(x, y) {
-    let red5points = {
-        x: x,
-        y: y,
-        size: 20,
-    };
-    return red5points;
-}
-
-function createRed10(x, y) {
-    let red10points = {
-        x: x,
-        y: y,
-        size: 40,
-    };
-    return red10points;
-}
-
-function createGreen5(x, y) {
-    let green5points = {
-        x: x,
-        y: y,
-        size: 20,
-    };
-    return green5points;
-}
-
-function createBlue5(x, y) {
-    let blue5points = {
-        x: x,
-        y: y,
-        size: 20,
-    };
-    return blue5points;
+    createRGBcircles();
+    displayTargetColorBox();
 }
 
 /**
  * Description of draw()
 */
 function draw() {
-    for (let i = 0; i < red5points.length; i++) {
-        displayRed5(red5points[i]);
+    displayRGBcircles()
+
+}
+
+function createRGBcircles() {
+    // create the 5 points circles
+    for (let i = 0; i < smallCirclesNumber; i++) {
+        redSmallCircles[i] = createRedSmall(random(gameArea.leftWall, gameArea.rightWall), random(250, 330));
+        greenSmallCircles[i] = createGreenSmall(random(gameArea.leftWall, gameArea.rightWall), random(250, 330));
+        blueSmallCircles[i] = createBlueSmall(random(gameArea.leftWall, gameArea.rightWall), random(250, 330));
     }
-    for (let i = 0; i < red10points.length; i++) {
-        displayRed10(red10points[i]);
+
+    // create the 10 points circles
+    for (let i = 0; i < mediumCirclesNumber; i++) {
+        redMediumCircles[i] = createRedMedium(random(gameArea.leftWall, gameArea.rightWall), random(370, 620));
+        greenMediumCircles[i] = createGreenMedium(random(gameArea.leftWall, gameArea.rightWall), random(380, 620));
+        blueMediumCircles[i] = createBlueMedium(random(gameArea.leftWall, gameArea.rightWall), random(380, 620));
     }
-    for (let i = 0; i < green5points.length; i++) {
-        displayGreen5(green5points[i]);
+
+    // create the 20 points circles
+    for (let i = 0; i < bigCirclesNumber; i++) {
+        redBigCircles[i] = createRedBig(random(gameArea.leftWall, gameArea.rightWall), random(690, 900));
+        greenBigCircles[i] = createGreenBig(random(gameArea.leftWall, gameArea.rightWall), random(690, 900));
+        blueBigCircles[i] = createBlueBig(random(gameArea.leftWall, gameArea.rightWall), random(690, 900));
     }
-    for (let i = 0; i < blue5points.length; i++) {
-        displayBlue5(blue5points[i]);
+
+    function createRedSmall(x, y) {
+        let redSmallCircles = {
+            x: x,
+            y: y,
+            size: 20,
+        };
+        return redSmallCircles;
+    }
+    function createGreenSmall(x, y) {
+        let greenSmallCircles = {
+            x: x,
+            y: y,
+            size: 20,
+        };
+        return greenSmallCircles;
+    }
+    function createBlueSmall(x, y) {
+        let blueSmallCircles = {
+            x: x,
+            y: y,
+            size: 20,
+        };
+        return blueSmallCircles;
+    }
+    function createRedMedium(x, y) {
+        let redMediumCircles = {
+            x: x,
+            y: y,
+            size: 40,
+        };
+        return redMediumCircles;
+    }
+    function createGreenMedium(x, y) {
+        let greenMediumCircles = {
+            x: x,
+            y: y,
+            size: 40,
+        };
+        return greenMediumCircles;
+    }
+    function createBlueMedium(x, y) {
+        let blueMediumCircles = {
+            x: x,
+            y: y,
+            size: 40,
+        };
+        return blueMediumCircles;
+    }
+    function createRedBig(x, y) {
+        let redBigCircles = {
+            x: x,
+            y: y,
+            size: 80,
+        };
+        return redBigCircles;
+    }
+    function createGreenBig(x, y) {
+        let greenBigCircles = {
+            x: x,
+            y: y,
+            size: 80,
+        };
+        return greenBigCircles;
+    }
+    function createBlueBig(x, y) {
+        let blueBigCircles = {
+            x: x,
+            y: y,
+            size: 80,
+        };
+        return blueBigCircles;
     }
 }
 
-function displayRed5(red5points) {
+function displayRGBcircles() {
+    for (let i = 0; i < redSmallCircles.length; i++) {
+        displayRedSmall(redSmallCircles[i]);
+    }
+    for (let i = 0; i < redMediumCircles.length; i++) {
+        displayRedMedium(redMediumCircles[i]);
+    }
+    for (let i = 0; i < redBigCircles.length; i++) {
+        displayRedBig(redBigCircles[i]);
+    }
+    for (let i = 0; i < greenSmallCircles.length; i++) {
+        displayGreenSmall(greenSmallCircles[i]);
+    }
+    for (let i = 0; i < greenMediumCircles.length; i++) {
+        displayGreenMedium(greenMediumCircles[i]);
+    }
+    for (let i = 0; i < greenBigCircles.length; i++) {
+        displayGreenBig(greenBigCircles[i]);
+    }
+    for (let i = 0; i < blueSmallCircles.length; i++) {
+        displayBlueSmall(blueSmallCircles[i]);
+    }
+    for (let i = 0; i < blueMediumCircles.length; i++) {
+        displayBlueMedium(blueMediumCircles[i]);
+    }
+    for (let i = 0; i < blueBigCircles.length; i++) {
+        displayBlueBig(blueBigCircles[i]);
+    }
+}
+
+function displayRedSmall(redSmallCircles) {
     push();
     noStroke();
     fill(255, 0, 0, 100);
-    ellipse(red5points.x, red5points.y, red5points.size);
+    ellipse(redSmallCircles.x, redSmallCircles.y, redSmallCircles.size);
     pop();
 }
-
-function displayRed10(red10points) {
+function displayRedMedium(redMediumCircles) {
     push();
     noStroke();
     fill(255, 0, 0, 100);
-    ellipse(red10points.x, red10points.y, red10points.size);
+    ellipse(redMediumCircles.x, redMediumCircles.y, redMediumCircles.size);
+    pop();
+}
+function displayRedBig(redBigCircles) {
+    push();
+    noStroke();
+    fill(255, 0, 0, 100);
+    ellipse(redBigCircles.x, redBigCircles.y, redBigCircles.size);
     pop();
 }
 
-function displayGreen5(green5points) {
+function displayGreenSmall(greenSmallCircles) {
     push();
     noStroke();
     fill(0, 255, 0, 100);
-    ellipse(green5points.x, green5points.y, green5points.size);
+    ellipse(greenSmallCircles.x, greenSmallCircles.y, greenSmallCircles.size);
+    pop();
+}
+function displayGreenMedium(greenMediumCircles) {
+    push();
+    noStroke();
+    fill(0, 255, 0, 100);
+    ellipse(greenMediumCircles.x, greenMediumCircles.y, greenMediumCircles.size);
+    pop();
+}
+function displayGreenBig(greenBigCircles) {
+    push();
+    noStroke();
+    fill(0, 255, 0, 100);
+    ellipse(greenBigCircles.x, greenBigCircles.y, greenBigCircles.size);
     pop();
 }
 
-function displayBlue5(blue5points) {
+function displayBlueSmall(blueSmallCircles) {
     push();
     noStroke();
     fill(0, 0, 255, 100);
-    ellipse(blue5points.x, blue5points.y, blue5points.size);
+    ellipse(blueSmallCircles.x, blueSmallCircles.y, blueSmallCircles.size);
     pop();
+}
+function displayBlueMedium(blueMediumCircles) {
+    push();
+    noStroke();
+    fill(0, 0, 255, 100);
+    ellipse(blueMediumCircles.x, blueMediumCircles.y, blueMediumCircles.size);
+    pop();
+}
+function displayBlueBig(blueBigCircles) {
+    push();
+    noStroke();
+    fill(0, 0, 255, 100);
+    ellipse(blueBigCircles.x, blueBigCircles.y, blueBigCircles.size);
+    pop();
+}
+
+function displayTargetColorBox() {
+    noStroke();
+    targetColor.r = random(0, 255);
+    targetColor.g = random(0, 255);
+    targetColor.b = random(0, 255);
+
+    rectMode(CENTER);
+    rect(targetColorBox.x, targetColorBox.y, targetColorBox.width, targetColorBox.height); 
 }
