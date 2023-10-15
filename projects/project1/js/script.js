@@ -36,7 +36,7 @@ let userColorBox = {
 let userColor = {
     r: undefined,
     g: undefined,
-    b: undefined
+    b: undefined,
 }
 
 let gameArea = {
@@ -46,23 +46,33 @@ let gameArea = {
     bottomWall: 950,
 }
 
+class Circle {
+    constructor(x, y, r, g, b, size) {
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.g = g;
+        this.b = b;
+        this.size = size;
+    }
+}
+
 // these are the targets worth 5 points
-let smallCirclesNumber = 15;
-let redSmallCircles = [];
-let greenSmallCircles = [];
-let blueSmallCircles = [];
+let smallCirclesNumber = 45;
+let tempX = 80;
+let tempY = 250;
+let smallCirclesDistance = 60;
 
 // these are the targets worth 10 points
-let mediumCirclesNumber = 10;
-let redMediumCircles = [];
-let greenMediumCircles = [];
-let blueMediumCircles = [];
+let mediumCirclesNumber = 30;
+let mediumCirclesDistance = 95;
 
 // these are the targets worth 20 points
-let bigCirclesNumber = 4;
-let redBigCircles = [];
-let greenBigCircles = [];
-let blueBigCircles = [];
+let bigCirclesNumber = 12;
+let bigCirclesDistance = 125;
+
+let circles = [];
+let totalCircles = 87;
 
 /**
  * Description of setup
@@ -79,208 +89,119 @@ function setup() {
  * Description of draw()
 */
 function draw() {
-    displayRGBcircles()
-
+    displayRGBcircles();
+    displayUserColorBox();
 }
 
 function createRGBcircles() {
-    // create the 5 points circles
-    for (let i = 0; i < smallCirclesNumber; i++) {
-        redSmallCircles[i] = createRedSmall(random(gameArea.leftWall, gameArea.rightWall), random(250, 330));
-        greenSmallCircles[i] = createGreenSmall(random(gameArea.leftWall, gameArea.rightWall), random(250, 330));
-        blueSmallCircles[i] = createBlueSmall(random(gameArea.leftWall, gameArea.rightWall), random(250, 330));
-    }
+    // creates the RGB circles
+    for (let i = 0; i < totalCircles; i++) {
+        if (i < 15) {
+        circles[i] = new Circle(tempX, tempY, 255, 0, 0, 20);
+        tempX += smallCirclesDistance;
+        }
+        else if (i < 30) {
+        circles[i] = new Circle(tempX, tempY, 0, 255, 0, 20);
+        tempX += smallCirclesDistance;
+        }
+        else if (i < 45) {
+        circles[i] = new Circle(tempX, tempY, 0, 0, 255, 20);
+        tempX += smallCirclesDistance;
+        }
+        else if (i < 55) {
+        circles[i] = new Circle(tempX, tempY, 255, 0, 0, 40);
+        tempX += mediumCirclesDistance;
+        }
+        else if (i < 65) {
+        circles[i] = new Circle(tempX, tempY, 0, 255, 0, 40);
+        tempX += mediumCirclesDistance;
+        }
+        else if (i < 75) {
+        circles[i] = new Circle(tempX, tempY, 0, 0, 255, 40);
+        tempX += mediumCirclesDistance;
+        }
+        else if (i < 79) {
+        circles[i] = new Circle(tempX, tempY, 255, 0, 0, 80);
+        tempX += bigCirclesDistance;
+        }
+        else if (i < 83) {
+        circles[i] = new Circle(tempX, tempY, 0, 255, 0, 80);
+        tempX += bigCirclesDistance;
+        }
+        else if (i <= 87) {
+        circles[i] = new Circle(tempX, tempY, 0, 0, 255, 80);
+        tempX += bigCirclesDistance;
+        }
 
-    // create the 10 points circles
-    for (let i = 0; i < mediumCirclesNumber; i++) {
-        redMediumCircles[i] = createRedMedium(random(gameArea.leftWall, gameArea.rightWall), random(370, 620));
-        greenMediumCircles[i] = createGreenMedium(random(gameArea.leftWall, gameArea.rightWall), random(380, 620));
-        blueMediumCircles[i] = createBlueMedium(random(gameArea.leftWall, gameArea.rightWall), random(380, 620));
-    }
-
-    // create the 20 points circles
-    for (let i = 0; i < bigCirclesNumber; i++) {
-        redBigCircles[i] = createRedBig(random(gameArea.leftWall, gameArea.rightWall), random(690, 900));
-        greenBigCircles[i] = createGreenBig(random(gameArea.leftWall, gameArea.rightWall), random(690, 900));
-        blueBigCircles[i] = createBlueBig(random(gameArea.leftWall, gameArea.rightWall), random(690, 900));
-    }
-
-    function createRedSmall(x, y) {
-        let redSmallCircles = {
-            x: x,
-            y: y,
-            size: 20,
-        };
-        return redSmallCircles;
-    }
-    function createGreenSmall(x, y) {
-        let greenSmallCircles = {
-            x: x,
-            y: y,
-            size: 20,
-        };
-        return greenSmallCircles;
-    }
-    function createBlueSmall(x, y) {
-        let blueSmallCircles = {
-            x: x,
-            y: y,
-            size: 20,
-        };
-        return blueSmallCircles;
-    }
-    function createRedMedium(x, y) {
-        let redMediumCircles = {
-            x: x,
-            y: y,
-            size: 40,
-        };
-        return redMediumCircles;
-    }
-    function createGreenMedium(x, y) {
-        let greenMediumCircles = {
-            x: x,
-            y: y,
-            size: 40,
-        };
-        return greenMediumCircles;
-    }
-    function createBlueMedium(x, y) {
-        let blueMediumCircles = {
-            x: x,
-            y: y,
-            size: 40,
-        };
-        return blueMediumCircles;
-    }
-    function createRedBig(x, y) {
-        let redBigCircles = {
-            x: x,
-            y: y,
-            size: 80,
-        };
-        return redBigCircles;
-    }
-    function createGreenBig(x, y) {
-        let greenBigCircles = {
-            x: x,
-            y: y,
-            size: 80,
-        };
-        return greenBigCircles;
-    }
-    function createBlueBig(x, y) {
-        let blueBigCircles = {
-            x: x,
-            y: y,
-            size: 80,
-        };
-        return blueBigCircles;
+        // sets the starting X position of the small circles
+        // and the distance between the rows of small circles
+        if (i === 14 || i === 29) {
+            tempX = 80;
+            tempY += 50;
+        }
+        // sets the starting X position of the medium circles
+        // and the distance between the rows of medium circles
+        if(i === 44 || i === 54 || i === 64) {
+            tempX = 70;
+            tempY += 80;
+        }
+        // sets the starting X position of the big circles
+        // and the distance between the rows of big circles
+        if ( i === 74 || i === 78 || i === 82) {
+            tempX = 310;
+            tempY += 100;
+        }
     }
 }
 
 function displayRGBcircles() {
-    for (let i = 0; i < redSmallCircles.length; i++) {
-        displayRedSmall(redSmallCircles[i]);
-    }
-    for (let i = 0; i < redMediumCircles.length; i++) {
-        displayRedMedium(redMediumCircles[i]);
-    }
-    for (let i = 0; i < redBigCircles.length; i++) {
-        displayRedBig(redBigCircles[i]);
-    }
-    for (let i = 0; i < greenSmallCircles.length; i++) {
-        displayGreenSmall(greenSmallCircles[i]);
-    }
-    for (let i = 0; i < greenMediumCircles.length; i++) {
-        displayGreenMedium(greenMediumCircles[i]);
-    }
-    for (let i = 0; i < greenBigCircles.length; i++) {
-        displayGreenBig(greenBigCircles[i]);
-    }
-    for (let i = 0; i < blueSmallCircles.length; i++) {
-        displayBlueSmall(blueSmallCircles[i]);
-    }
-    for (let i = 0; i < blueMediumCircles.length; i++) {
-        displayBlueMedium(blueMediumCircles[i]);
-    }
-    for (let i = 0; i < blueBigCircles.length; i++) {
-        displayBlueBig(blueBigCircles[i]);
+    // connects the created RGB circles to its class
+    for (let circle of circles) {
+        displayCircle(circle); 
     }
 }
 
-function displayRedSmall(redSmallCircles) {
+function displayCircle(circle) {
+    // displays the objects as created
     push();
     noStroke();
-    fill(255, 0, 0, 100);
-    ellipse(redSmallCircles.x, redSmallCircles.y, redSmallCircles.size);
-    pop();
-}
-function displayRedMedium(redMediumCircles) {
-    push();
-    noStroke();
-    fill(255, 0, 0, 100);
-    ellipse(redMediumCircles.x, redMediumCircles.y, redMediumCircles.size);
-    pop();
-}
-function displayRedBig(redBigCircles) {
-    push();
-    noStroke();
-    fill(255, 0, 0, 100);
-    ellipse(redBigCircles.x, redBigCircles.y, redBigCircles.size);
-    pop();
-}
-
-function displayGreenSmall(greenSmallCircles) {
-    push();
-    noStroke();
-    fill(0, 255, 0, 100);
-    ellipse(greenSmallCircles.x, greenSmallCircles.y, greenSmallCircles.size);
-    pop();
-}
-function displayGreenMedium(greenMediumCircles) {
-    push();
-    noStroke();
-    fill(0, 255, 0, 100);
-    ellipse(greenMediumCircles.x, greenMediumCircles.y, greenMediumCircles.size);
-    pop();
-}
-function displayGreenBig(greenBigCircles) {
-    push();
-    noStroke();
-    fill(0, 255, 0, 100);
-    ellipse(greenBigCircles.x, greenBigCircles.y, greenBigCircles.size);
-    pop();
-}
-
-function displayBlueSmall(blueSmallCircles) {
-    push();
-    noStroke();
-    fill(0, 0, 255, 100);
-    ellipse(blueSmallCircles.x, blueSmallCircles.y, blueSmallCircles.size);
-    pop();
-}
-function displayBlueMedium(blueMediumCircles) {
-    push();
-    noStroke();
-    fill(0, 0, 255, 100);
-    ellipse(blueMediumCircles.x, blueMediumCircles.y, blueMediumCircles.size);
-    pop();
-}
-function displayBlueBig(blueBigCircles) {
-    push();
-    noStroke();
-    fill(0, 0, 255, 100);
-    ellipse(blueBigCircles.x, blueBigCircles.y, blueBigCircles.size);
+    fill(circle.r, circle.g, circle.b);
+    ellipse(circle.x, circle.y, circle.size);
     pop();
 }
 
 function displayTargetColorBox() {
-    noStroke();
-    targetColor.r = random(0, 255);
-    targetColor.g = random(0, 255);
-    targetColor.b = random(0, 255);
+    stroke(255);
+    strokeWeight(3);
+    // sets the R, G, and B values of the target color to multiples of 5
+    targetColor.r = floor(random(0, 255/5)) * 5;
+    targetColor.g = floor(random(0, 255/5)) * 5;
+    targetColor.b = floor(random(0, 255/5)) * 5;
 
+    // displays the target color
     rectMode(CENTER);
+    fill(targetColor.r, targetColor.g, targetColor.b); 
     rect(targetColorBox.x, targetColorBox.y, targetColorBox.width, targetColorBox.height); 
+}
+
+function displayUserColorBox() {
+    stroke(255);
+    strokeWeight(3);
+    // sets the R, G, and B values of the user color to variables
+    userColor.r = 0;
+    userColor.g = 0;
+    userColor.b = 0;
+
+    fill(userColor.r, userColor.g, userColor.b);
+    rect(userColorBox.x, userColorBox.y, userColorBox.width, userColorBox.height);
+}
+
+function mousePressed() {
+    for (let i = 0; i < circles.length; i++) {
+        let circle = circles[i];
+        let d = dist(mouseX, mouseY, circle.x, circle.y);
+        if (d < circle.size / 2) {
+            
+        }
+    }
 }
