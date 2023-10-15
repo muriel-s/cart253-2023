@@ -7,12 +7,6 @@
 
 "use strict";
 
-let user = {
-    x: undefined,
-    y: undefined,
-    size: 20,
-};
-
 let targetColorBox = {
     x: 250,
     y: 125,
@@ -34,9 +28,9 @@ let userColorBox = {
 }
 
 let userColor = {
-    r: undefined,
-    g: undefined,
-    b: undefined,
+    r: 0,
+    g: 0,
+    b: 0,
 }
 
 let gameArea = {
@@ -57,10 +51,12 @@ class Circle {
     }
 }
 
-// these are the targets worth 5 points
-let smallCirclesNumber = 45;
+// starting position for the first row of RGB circles
 let tempX = 80;
 let tempY = 250;
+
+// these are the targets worth 5 points
+let smallCirclesNumber = 45;
 let smallCirclesDistance = 60;
 
 // these are the targets worth 10 points
@@ -91,6 +87,7 @@ function setup() {
 function draw() {
     displayRGBcircles();
     displayUserColorBox();
+    print(circles);
 }
 
 function createRGBcircles() {
@@ -170,6 +167,56 @@ function displayCircle(circle) {
     pop();
 }
 
+// makes the RGB buttons disappear when you click on them
+// and adds to the RGB values of the user color
+function mouseClicked() {
+    for (let i = 0; i < circles.length; i++) {
+        let circle = circles[i];
+        let d = dist(circles[i].x, circles[i].y, mouseX, mouseY);
+        if (d < circle.size) {
+            circles.splice(i, 0)
+            if (circles[i].r === 255 && circles[i].size === 20) {
+                circles[i].r = 0;
+                userColor.r += 5;
+            }
+            if (circles[i].r === 255 && circles[i].size === 40) {
+                circles[i].r = 0;
+                userColor.r += 10;
+            }
+            if (circles[i].r === 255 && circles[i].size === 80) {
+                circles[i].r = 0;
+                userColor.r += 20;
+            }
+            if (circles[i].g === 255 && circles[i].size === 20) {
+                circles[i].g = 0;
+                userColor.g += 5;
+            }
+            if (circles[i].g === 255 && circles[i].size === 40) {
+                circles[i].g = 0;
+                userColor.g += 10;
+            }
+            if (circles[i].g === 255 && circles[i].size === 80) {
+                circles[i].g = 0;
+                userColor.g += 20;
+            }
+            if (circles[i].b === 255 && circles[i].size === 20) {
+                circles[i].b = 0;
+                userColor.b += 5;
+            }
+            if (circles[i].b === 255 && circles[i].size === 40) {
+                circles[i].b = 0;
+                userColor.b += 10;
+            }
+            if (circles[i].b === 255 && circles[i].size === 80) {
+                circles[i].b = 0;
+                userColor.b += 20;
+            }
+            break;
+        }
+    }
+}
+
+
 function displayTargetColorBox() {
     stroke(255);
     strokeWeight(3);
@@ -188,20 +235,6 @@ function displayUserColorBox() {
     stroke(255);
     strokeWeight(3);
     // sets the R, G, and B values of the user color to variables
-    userColor.r = 0;
-    userColor.g = 0;
-    userColor.b = 0;
-
     fill(userColor.r, userColor.g, userColor.b);
     rect(userColorBox.x, userColorBox.y, userColorBox.width, userColorBox.height);
-}
-
-function mousePressed() {
-    for (let i = 0; i < circles.length; i++) {
-        let circle = circles[i];
-        let d = dist(mouseX, mouseY, circle.x, circle.y);
-        if (d < circle.size / 2) {
-            
-        }
-    }
 }
