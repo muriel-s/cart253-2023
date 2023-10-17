@@ -13,7 +13,6 @@ let targetColorBox = {
     width: 300,
     height: 150,
 }
-
 let targetColor = {
     r: undefined,
     g: undefined,
@@ -26,20 +25,13 @@ let userColorBox = {
     width: 300,
     height: 150,
 }
-
 let userColor = {
     r: 0,
     g: 0,
     b: 0,
 }
 
-let gameArea = {
-    leftWall: 50,
-    rightWall: 950,
-    topWall: 250,
-    bottomWall: 950,
-}
-
+// class used to build the R, G, & B circles
 class Circle {
     constructor(x, y, r, g, b, size) {
         this.x = x;
@@ -72,8 +64,15 @@ let totalCircles = 87;
 
 let state = `title`;
 
+let startButton = {
+    x: 150,
+    y: 750,
+    width: 200,
+    height: 100,
+}
+
 /**
- * Description of setup
+ * Contains canvas setup
 */
 function setup() {
     createCanvas(1000,1000);
@@ -83,7 +82,7 @@ function setup() {
 }
 
 /**
- * Description of draw()
+ * Contains the states
 */
 function draw() {
     background(0);
@@ -103,8 +102,14 @@ function draw() {
 }
 
 function title() {
+    // draws Start button
     push();
+    fill(255, 0, 255, 100);
+    ellipse(startButton.x, startButton.y, startButton.width, startButton.height);
+    pop();
+
     // text styles
+    push();
     noStroke();
     fill(225);
     textAlign(LEFT, TOP);
@@ -115,31 +120,41 @@ function title() {
     textSize(48);
     text(`RGB Color Match`, 450, 150);
 
-    // instructions
+    // instructions & start button
     textSize(26);
     text(`Try to match the color in the top left by mixing red, \ngreen, and blue light.`, 50, 300);
     text(`Clicking on the red buttons adds red to your color mix, \nclicking the green buttons adds green, and the blue \nbuttons add blue.`, 50, 380);
     text(`The lighter the color, the more you will have to add. \nBut be careful, because you can't make it darker again!`, 50, 500);
-    text(`Click here to begin.`, 50, 700);
+    text(`START`, 110, 738);
     pop();
 }
 
+// adds function to start button
 function mousePressed() {
+    let d = dist(mouseX, mouseY, startButton.x, startButton.y);
+    if (d < startButton.width) {
+        startGame();
+    };
+}
+function startGame() {
     if (state === `title`) {
         state = `game`
     }
 }
 
+// contains actions for game
 function game() {
     displayTargetColorBox();
     displayRGBcircles();
     displayUserColorBox();
     checkForWin();
     checkForFail();
+    print(`target color is:`, targetColor.r, targetColor.g, targetColor.b);
+    print(`current user color is:`, userColor.r, userColor.g, userColor.b);
 }
 
+// creates the RGB circles using Circle constructor, placing them into circles[] array
 function createRGBcircles() {
-    // creates the RGB circles
     for (let i = 0; i < totalCircles; i++) {
         if (i < 15) {
         circles[i] = new Circle(tempX, tempY, 255, 0, 0, 20);
@@ -178,19 +193,19 @@ function createRGBcircles() {
         tempX += bigCirclesDistance;
         }
 
-        // sets the starting X position of the small circles
+        // sets the first X position of the small circles
         // and the distance between the rows of small circles
         if (i === 14 || i === 29) {
             tempX = 80;
             tempY += 50;
         }
-        // sets the starting X position of the medium circles
+        // sets the first X position of the medium circles
         // and the distance between the rows of medium circles
         if(i === 44 || i === 54 || i === 64) {
             tempX = 70;
             tempY += 80;
         }
-        // sets the starting X position of the big circles
+        // sets the first X position of the big circles
         // and the distance between the rows of big circles
         if ( i === 74 || i === 78 || i === 82) {
             tempX = 310;
@@ -199,15 +214,15 @@ function createRGBcircles() {
     }
 }
 
+// connects the created RGB circles to the function that displays them
 function displayRGBcircles() {
-    // connects the created RGB circles to its class
     for (let circle of circles) {
         displayCircle(circle); 
     }
 }
 
+// displays the RGB circle objects as created
 function displayCircle(circle) {
-    // displays the objects as created
     push();
     noStroke();
     fill(circle.r, circle.g, circle.b);
@@ -264,8 +279,8 @@ function mouseClicked() {
     }
 }
 
+// sets the R, G, and B values of the target color to multiples of 5
 function createTargetColor() {
-    // sets the R, G, and B values of the target color to multiples of 5
     targetColor.r = floor(random(0, 255/5)) * 5;
     targetColor.g = floor(random(0, 255/5)) * 5;
     targetColor.b = floor(random(0, 255/5)) * 5;
@@ -275,7 +290,6 @@ function createTargetColor() {
 function displayTargetColorBox() {
     stroke(255);
     strokeWeight(3);
-
     // displays the target color
     rectMode(CENTER);
     fill(targetColor.r, targetColor.g, targetColor.b); 
@@ -290,53 +304,56 @@ function displayUserColorBox() {
     rect(userColorBox.x, userColorBox.y, userColorBox.width, userColorBox.height);
 }
 
-function checkForWin() {
-    if (userColor.r === targetColor.r && userColor.g === targetColor.g && userColor.b === targetColor.b) {
-        state = `win`
+// sets the range in which each value should be in to win the game
+function isInTargetRange(userRGB, targetRGB) {
+    if (userRGB < targetRGB + 20 && userRGB > targetRGB - 20) {
+        return true;
     }
 }
 
+function checkForWin() {
+    if (isInTargetRange(userColor.r, targetColor.r) && isInTargetRange(userColor.g, userColor.g) && isInTargetRange(userColor.b, userColor.b)) {
+        state = `win`;
+    }
+}
 function win() {
     // draws confetti
     for (let i = 0; i < 1000 ; i++) {
         let x = random(0, width);
         let y = random(0, height);
-        stroke(random(0,255), random(0,255), random(0,255));
+        stroke(random(100,255), random(100,255), random(100,255));
         strokeWeight(4);
         point(x, y);
     }
-
+    // keeps the target color and user color onscreen so the player can admire their skills
     displayUserColorBox();
     displayTargetColorBox();
-
-    // text styles
+    // displays winning text
     push();
     noStroke();
     fill(225);
     textAlign(CENTER, CENTER);
     textFont(`Roboto Mono`);
     textStyle(`Thin 100`);
-
-    // title
     textSize(100);
-    text(`WAHOO!!!`, width/2, height/2);    
+    text(`WAHOO!!!`, width/2, height/2);
+    pop();   
 }
 
 function checkForFail() {
-    if (userColor.r > targetColor.r || userColor.g > targetColor.g || userColor.b > targetColor.b) {
+    if (userColor.r > targetColor.r+20 || userColor.g > targetColor.g+20 || userColor.b > targetColor.b+20) {
         state = `failure`
     }
 }
-
 function failure() {
-    // text styles
+    // displays losing text
     push();
     noStroke();
     fill(225, 50, 50);
     textAlign(CENTER, CENTER);
     textFont(`Roboto Mono`);
     textStyle(`Thin 100`);
-    // title
     textSize(100);
-    text(`YOU DIED`, width/2, height/2); 
+    text(`YOU DIED`, width/2, height/2);
+    pop();
 }
