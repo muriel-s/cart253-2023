@@ -71,14 +71,24 @@ let startButton = {
     height: 100,
 }
 
+let tips = [];
+tips[0] = `Clicking all of the buttons will create pure white.`;
+tips[1] = `The lighter the color, the more you will have to add.`;
+tips[2] = `Muted colors contain similar amounts of each color.`;
+tips[3] = `In additive color, red + green = yellow.`;
+tips[4] = `The maximum for each color value is 255.`;
+tips[5] = `In additive color, blue + green = cyan.`;
+let selectedTip;
+
 /**
- * Contains canvas setup
+ * Sets up canvas, decides on target color, and decides which tip to display in title screen
 */
 function setup() {
     createCanvas(1000,1000);
 
     createRGBcircles();
     createTargetColor();
+    selectedTip = random(tips);
 }
 
 /**
@@ -120,12 +130,13 @@ function title() {
     textSize(48);
     text(`RGB Color Match`, 450, 150);
 
-    // instructions & start button
+    // instructions, tip & start button
     textSize(26);
     text(`Try to match the color in the top left by mixing red, \ngreen, and blue light.`, 50, 300);
     text(`Clicking on the red buttons adds red to your color mix, \nclicking the green buttons adds green, and the blue \nbuttons add blue.`, 50, 380);
-    text(`The lighter the color, the more you will have to add. \nBut be careful, because you can't make it darker again!`, 50, 500);
+    text(`The smallest buttons add 5 points, the middle buttons \nadd 10 points, and the large buttons add 20 points.`, 50, 500);
     text(`START`, 110, 738);
+    text(`Tip: ${selectedTip}`, 50, 900);
     pop();
 }
 
@@ -337,15 +348,23 @@ function win() {
     textStyle(`Thin 100`);
     textSize(100);
     text(`WAHOO!!!`, width/2, height/2);
+    // displays final results so the player can admire their skills
+    textAlign(CENTER, TOP);
+    textSize(32);
+    text(`R: ${targetColor.r}\nG: ${targetColor.g}\nB: ${targetColor.b}`, targetColorBox.x, 250);
+    text(`R: ${userColor.r}\nG: ${userColor.g}\nB: ${userColor.b}`, userColorBox.x, 250);
     pop();   
 }
 
 function checkForFail() {
-    if (userColor.r > targetColor.r+20 || userColor.g > targetColor.g+20 || userColor.b > targetColor.b+20) {
+    if (userColor.r > targetColor.r + 20 || userColor.g > targetColor.g + 20 || userColor.b > targetColor.b + 20) {
         state = `failure`
     }
 }
 function failure() {
+    // keeps the target color and user color onscreen so the player can learn from their mistakes
+    displayUserColorBox();
+    displayTargetColorBox();
     // displays losing text
     push();
     noStroke();
@@ -355,5 +374,10 @@ function failure() {
     textStyle(`Thin 100`);
     textSize(100);
     text(`YOU DIED`, width/2, height/2);
-    pop();
+    // displays final results so the player can learn from their mistakes
+    textAlign(CENTER, TOP);
+    textSize(32);
+    text(`R: ${targetColor.r}\nG: ${targetColor.g}\nB: ${targetColor.b}`, targetColorBox.x, 250);
+    text(`R: ${userColor.r}\nG: ${userColor.g}\nB: ${userColor.b}`, userColorBox.x, 250);
+    pop();   
 }
