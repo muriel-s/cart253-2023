@@ -290,11 +290,11 @@ function mouseClicked() {
     }
 }
 
-// sets the R, G, and B values of the target color to multiples of 5
+// sets the R, G, and B values of the target color to multiples of 5, with a minimum of 20 for each value so that you can't automatically win
 function createTargetColor() {
-    targetColor.r = floor(random(0, 255/5)) * 5;
-    targetColor.g = floor(random(0, 255/5)) * 5;
-    targetColor.b = floor(random(0, 255/5)) * 5;
+    targetColor.r = floor(random(20, 255/5)) * 5;
+    targetColor.g = floor(random(20, 255/5)) * 5;
+    targetColor.b = floor(random(20, 255/5)) * 5;
     
 }
 
