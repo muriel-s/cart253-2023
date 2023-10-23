@@ -1,32 +1,54 @@
 /**
- * Title of Project
- * Author Name
+ * Arrays Experiments
+ * Muriel Smith
  * 
- * This is a template. You must fill in the title, author, 
- * and this description to match your project!
+ * ways that youtube's automated captions have interpreted Pippin saying "arrays":
+ * 1. a raise
+ * 2. erase
+ * 3. arrays
+ * 4. the raise
+ * 5. 
+ * 
+ * ways that youtubes captions have interpreted Pippin saying "barks":
+ * 1. bachs
+ * 2. bikes
+ * 3. backs
  */
 
 "use strict";
 
-/**
- * Description of preload
-*/
-function preload() {
+let circle = {
+    x: 0,
+    y: 0,
+    size: 100,
+    trail: [],
+    trailSize: 20
+};
 
-}
-
-
-/**
- * Description of setup
-*/
 function setup() {
-
+    createCanvas(600, 600);
 }
 
-
-/**
- * Description of draw()
-*/
 function draw() {
+    background(0);
 
+    circle.x = mouseX;
+    circle.y = mouseY;
+
+    for (let i = 0; i < circle.trail.length; i++) {
+        let position = circle.trail[i];
+        ellipse(position.x, position.y, circle.size);
+    }
+
+    ellipse(circle.x, circle.y, circle.size);
+
+    let newTrailPosition = {
+        x: circle.x,
+        y: circle.y
+    };
+    circle.trail.push(newTrailPosition);
+
+    if (circle.trail.length > circle.trailSize) {
+        circle.trail.shift();
+    }
 }
