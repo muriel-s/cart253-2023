@@ -12,7 +12,7 @@ let school = [];
 let schoolSize = 10;
 
 function setup() {
-    createCanvas(600,600);
+    createCanvas(1000,1000);
 
     for (let i = 0; i < schoolSize; i++) {
         let fish = createFish(random(0, width), random(0,height));
