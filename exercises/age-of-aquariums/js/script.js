@@ -10,6 +10,18 @@
 
 let school = [];
 let schoolSize = 10;
+let fishImages = [];
+
+function preload() {
+    // loads images for my fish and puts them in fishImages array
+    fishImages[0] = loadImage(`assets/images/sea comb.png`);
+    fishImages[1] = loadImage(`assets/images/sea-angel-facts.png`);
+    fishImages[2] = loadImage(`assets/images/srimp.png`);
+
+    // loads images for my user fish
+    loadImage(`assets/images/anglerfish-lighton.png`);
+    loadImage(`assets/images/anglerfish-lightoff.png`);
+}
 
 function setup() {
     createCanvas(1000,1000);
@@ -24,7 +36,6 @@ function createFish(x, y) {
     let fish = {
         x: x,
         y: y,
-        size: 50,
         vx: 0,
         vy: 0,
         speed: 2
@@ -57,9 +68,8 @@ function moveFish(fish) {
 
 function displayFish(fish) {
     push();
-    fill(200, 100, 100);
-    noStroke();
-    ellipse(fish.x, fish.y, fish.size); 
+    let displayImage = random(fishImages);
+    image(displayImage, fish.x, fish.y); 
     pop();
 }
 
