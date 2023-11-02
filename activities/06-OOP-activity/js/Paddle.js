@@ -8,6 +8,7 @@ class Paddle {
     }
 
     move() {
+        // tracks the paddle horizontally to the mouse position
         this.x = mouseX;
     }
 

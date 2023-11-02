@@ -18,10 +18,10 @@ let numBalls = 3;
 function setup() {
     createCanvas(800,800);
 
-    // create paddle
+    // creates paddle
     paddle = new Paddle(200, 20);
 
-    // create balls
+    // creates balls
     for (let i = 0; i < numBalls; i++) {
         let ball = new Ball(random(0,width), random(0,height));
         balls.push(ball);
@@ -34,6 +34,7 @@ function draw() {
     paddle.move();
     paddle.display();
 
+    // displays balls if they are active
     for (let i = 0; i < balls.length; i++) {
         let ball = balls[i];
         if (ball.active) {
