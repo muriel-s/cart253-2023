@@ -5,10 +5,12 @@ class Bee {
         this.y = y;
         this.size = 40;
         this.minSize = 10;
+        this.maxSize = 40;
         this.vx = 0;
         this.vy = 0;
         this.speed = 5;
         this.shrinkRate = 0.05;
+        this.growRate = 0.05;
         this.jitteriness = 0.1;
         this.alive = true;
     }
@@ -51,5 +53,24 @@ class Bee {
         pop();
 
         // eyes
+        push();
+        fill(0);
+        noStroke();
+        ellipse(this.x - this.size/10, this.y, this.size/10);
+        ellipse(this.x + this.size/10, this.y, this.size/10);
+        pop();
+    }
+
+    tryToPollinate(flower) {
+        let d = dist(this.x, this.y, flower.x, flower.y);
+        if (d < this.size/2 + flower.size/2 + flower.petalThickness) {
+            this.grow();
+            flower.pollinate();
+        }
+    }
+
+    grow() {
+        this.size += this.growRate;
+        this.size = constrain(this.size, this.minSize, this.maxSize);
     }
 }
