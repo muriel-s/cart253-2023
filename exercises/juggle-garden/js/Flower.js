@@ -29,6 +29,7 @@ class Flower {
             b: 0
         };
         this.alive = true;
+        this.picked = false;
     }
 
     shrink() {
@@ -39,7 +40,7 @@ class Flower {
             this.alive = false;
         }
     }
-
+    
     display() {
         // draws stem
         push();
@@ -60,7 +61,24 @@ class Flower {
         this.size += this.growthRate;
         this.petalThickness += this.growthRate/10;
 
-        this.size = constrain (this.size, 0, this.maxSize);
+        this.size = constrain(this.size, 0, this.maxSize);
         this.petalThickness = constrain(this.petalThickness, 0, this.maxPetalThickness);
+    }
+
+    mousePressed(hand) {
+        // checks if mouse is pressed over flower stem
+        let d = dist(mouseX, mouseY, this.x, this.y + this.stemLength/2)
+        if (d < hand.size/2) {
+            // if yes, the flower has been picked
+            this.addToLeftHand();
+            this.picked = true;
+            pickedFlowers++;
+            console.log("num of picked flowers:"+pickedFlowers);
+        }
+    }
+
+    addToLeftHand() {
+        this.x = width/10;
+        this.y = 9*height/10 - this.stemLength;
     }
 }

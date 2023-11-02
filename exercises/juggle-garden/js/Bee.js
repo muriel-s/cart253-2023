@@ -8,11 +8,12 @@ class Bee {
         this.maxSize = 40;
         this.vx = 0;
         this.vy = 0;
-        this.speed = 5;
+        this.speed = 2;
         this.shrinkRate = 0.05;
         this.growRate = 0.05;
         this.jitteriness = 0.1;
         this.alive = true;
+        this.angry = false;
     }
 
     shrink() {
@@ -50,8 +51,8 @@ class Bee {
         push();
         fill(0);
         triangle(this.x - this.size/10, this.y,
-                this.x + this.size/10, this.y,
-                this.x, this.y + 2*this.size/3)
+                 this.x + this.size/10, this.y,
+                 this.x, this.y + 2*this.size/3)
 
         pop();
 
@@ -69,6 +70,18 @@ class Bee {
         ellipse(this.x - this.size/10, this.y, this.size/10);
         ellipse(this.x + this.size/10, this.y, this.size/10);
         pop();
+
+        if (this.angry) {
+            // angry eyebrows
+            push();
+            stroke(0);
+            strokeWeight(this.size/20);
+            line(this.x - this.size/20, this.y,
+                this.x - this.size/5, this.y - this.size/5);
+            line(this.x + this.size/20, this.y,
+                this.x + this.size/5, this.y - this.size/5);
+            pop();
+        }
     }
 
     tryToPollinate(flower) {
@@ -76,6 +89,14 @@ class Bee {
         if (d < this.size/2 + flower.size/2 + flower.petalThickness) {
             this.grow();
             flower.pollinate();
+        }
+    }
+
+    tryToSting(hand) {
+        let d = dist(this.x, this.y, hand.x, hand.y);
+        if (d < this.size/2 + hand.size/2) {
+            this.angry = true;
+            hand.getStung();
         }
     }
 

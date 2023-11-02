@@ -16,6 +16,7 @@ class Hand {
             g: 200,
             b: 180
         };
+        this.stung = false;
     }
 
     move() {
@@ -37,5 +38,14 @@ class Hand {
         stroke(this.handColor.r, this.handColor.g, this.handColor.b);
         line(this.elbowX, this.elbowY, this.x, this.y);
         pop();
+    }
+
+    getStung() {
+        // yeeowch!
+        this.handColor.r = 255;
+        this.handColor.g = 150;
+        this.handColor.b = 150;
+
+        this.stung = true;
     }
 }
