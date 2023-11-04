@@ -10,7 +10,6 @@
 
 let rightHand;
 let leftHand;
-
 let garden = {
     flowers: [],
     bees: [],
@@ -22,10 +21,15 @@ let garden = {
         b: 120
     }
 };
+let startButton = {
+    x: 300,
+    y: 500,
+    width: 100,
+    height: 50
+}
 
 let pickedFlowers = 0;
-
-let state = `simulation`;
+let state = `intro`;
 
 /*
 creates elements
@@ -71,7 +75,10 @@ contains states
 function draw() {
     background(garden.grasscolor.r, garden.grasscolor.g, garden.grasscolor.b);
 
-    if (state === `simulation`) {
+    if (state === `intro`) {
+        intro();
+    }
+    else if (state === `simulation`) {
         simulation();
     }
     else if (state === `win`) {
@@ -81,6 +88,11 @@ function draw() {
         lose();
     }
     
+}
+
+function intro() {
+    displayInstructions();
+    displayStartButton();
 }
 
 function simulation() {
@@ -183,9 +195,31 @@ function displayAngryBee() {
     }
 }
 
+function displayInstructions() {
+    push();
+    textAlign(LEFT, TOP);
+    textSize(width);
+    fill(0, 0, 0, 100);
+    text(`🌈`, -width/8, width/8, width);
+    fill(0, 0, 0, 255);
+    textAlign(LEFT, BOTTOM);
+    textSize(24);
+    textWrap(WORD);
+    text(`Welcome to my garden! \nYou can pick flowers by clicking on the top half of the stem. \nThe bees are very irritable though, so be careful not to touch them. \nCan you pick 10 flowers for me?`, width/8, height/8, width/2);
+    pop();
+}
+
+function displayStartButton() {
+    push();
+    fill(225);
+    noStroke();
+    rectMode(CENTER);
+    rect(startButton.x, startButton.y, startButton.width, startButton.height);
+    pop();
+}
+
 function displayWinText() {
     push();
-    noStroke();
     fill(0);
     textAlign(CENTER, CENTER);
     textSize(32);
@@ -195,7 +229,6 @@ function displayWinText() {
 
 function displayLoseText() {
     push();
-    noStroke();
     fill(0);
     textAlign(CENTER, CENTER);
     textSize(32);
