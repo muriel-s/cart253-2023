@@ -24,7 +24,7 @@ let noise = {
     hue: 180,
     saturation: 0,
     brightness: 100,
-    pointSize: 4,
+    pointSize: 2,
     area: 0.15
 }
 
@@ -37,9 +37,10 @@ let lines = {
     x: 0,
     y: 0,
     height: 0,
-    minHeight: 250,
+    minHeight: 500,
     maxHeight: 1000,
     spacing: 0,
+    variation: 10
 }
 
 function setup() {
@@ -52,27 +53,29 @@ function draw() {
     // draws background
     background(bg.h, bg.s, bg.b);
 
-    // draws lines
-    lines.height = lerp(lines.minHeight, lines.maxHeight, 0.5); 
-    lines.spacing = lines.thickness*2;
-    for (lines.x = 0; lines.x < width; lines.x += lines.spacing) {
-        push();
-        noFill();
-        strokeCap(ROUND);
-        strokeWeight(lines.thickness);
-        stroke(lines.h, lines.s, lines.b);
-        lines.y = randomGaussian(lines.height, lines.height/10);
-        lines.y = constrain(lines.y, lines.minHeight, lines.maxHeight);
-        line(lines.x, height, lines.x, lines.y);
-        pop();
-    }
-
     // draws noise
     for (let i = 0; i < noise.amount; i++) {
+        push(); 
         let x = randomGaussian(width/2, width*noise.area);
         let y = randomGaussian(height/2, width*noise.area);
         stroke(noise.hue, noise.saturation, noise.brightness);
         strokeWeight(noise.pointSize);
         point(x, y);
+        pop();
+    }
+
+    // draws lines at bottom of canvas
+    lines.height = lerp(lines.minHeight, lines.maxHeight, 0.5); 
+    lines.spacing = lines.thickness*2;
+    for (lines.x = 0; lines.x <= width; lines.x += lines.spacing) {
+        push();
+        noFill();
+        strokeCap(ROUND);
+        strokeWeight(lines.thickness);
+        stroke(lines.h, lines.s, lines.b);
+        lines.y = constrain(lines.y, lines.minHeight, lines.maxHeight);
+        line(lines.x, height, lines.x, lines.y);
+        lines.y = randomGaussian(lines.height, lines.height/lines.variation);
+        pop();
     }
 }
