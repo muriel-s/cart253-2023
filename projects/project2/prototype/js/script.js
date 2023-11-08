@@ -8,7 +8,9 @@
 
 "use strict";
 
-let background = {
+let fr = 12;
+
+let bg = {
     h: 180,
     s: 50,
     b: 50
@@ -17,9 +19,25 @@ let background = {
 let noise = {
     amount: 1000,
     hue: 180,
-    saturation: 100,
+    saturation: 0,
     brightness: 100,
-    pointSize: 1,
+    pointSize: 4,
+    area: 0.15
+}
+
+let circles = {
+    amount: 500,
+    thickness: 2,
+    h: 0,
+    s: 50,
+    b: 50,
+    x: 0,
+    y: 500,
+    width: 50,
+    height: 300,
+    spacing: 10,
+    minHeight: 300,
+    maxHeight: 500,
 }
 
 function setup() {
@@ -29,14 +47,72 @@ function setup() {
 
 function draw() {
     // draws background
-    background(background.h, background.s, background.b);
+    background(bg.h, bg.s, bg.b);
+    frameRate(fr);
 
     // draws noise
     for (let i = 0; i < noise.amount; i++) {
-        let x = random(0, width);
-        let y = random(0, height);
+        let x = randomGaussian(width/2, width*noise.area);
+        let y = randomGaussian(height/2, width*noise.area);
         stroke(noise.hue, noise.saturation, noise.brightness);
         strokeWeight(noise.pointSize);
         point(x, y);
+    }
+
+    // draws series of ellipses
+    let x = circles.x - circles.width/2;
+    for (let cHeight = circles.height; cHeight <= circles.maxHeight; cHeight += circles.spacing) {
+        push();
+        noFill();
+        strokeWeight(circles.thickness);
+        stroke(circles.h, circles.s, circles.b);
+        ellipse(x, circles.y, circles.width, cHeight);
+        x += circles.spacing;
+        pop();
+    }
+    for (let cHeight = circles.maxHeight; cHeight >= circles.minHeight; cHeight -= circles.spacing) {
+        push();
+        noFill();
+        strokeWeight(circles.thickness);
+        stroke(circles.h, circles.s, circles.b);
+        ellipse(x, circles.y, circles.width, cHeight);
+        x += circles.spacing;
+        pop();
+    }
+    for (let cHeight = circles.height; cHeight <= circles.maxHeight; cHeight += circles.spacing) {
+        push();
+        noFill();
+        strokeWeight(circles.thickness);
+        stroke(circles.h, circles.s, circles.b);
+        ellipse(x, circles.y, circles.width, cHeight);
+        x += circles.spacing;
+        pop();
+    }
+    for (let cHeight = circles.maxHeight; cHeight >= circles.minHeight; cHeight -= circles.spacing) {
+        push();
+        noFill();
+        strokeWeight(circles.thickness);
+        stroke(circles.h, circles.s, circles.b);
+        ellipse(x, circles.y, circles.width, cHeight);
+        x += circles.spacing;
+        pop();
+    }
+    for (let cHeight = circles.height; cHeight <= circles.maxHeight; cHeight += circles.spacing) {
+        push();
+        noFill();
+        strokeWeight(circles.thickness);
+        stroke(circles.h, circles.s, circles.b);
+        ellipse(x, circles.y, circles.width, cHeight);
+        x += circles.spacing;
+        pop();
+    }
+    for (let cHeight = circles.maxHeight; cHeight >= circles.minHeight; cHeight -= circles.spacing) {
+        push();
+        noFill();
+        strokeWeight(circles.thickness);
+        stroke(circles.h, circles.s, circles.b);
+        ellipse(x, circles.y, circles.width, cHeight);
+        x += circles.spacing;
+        pop();
     }
 }
