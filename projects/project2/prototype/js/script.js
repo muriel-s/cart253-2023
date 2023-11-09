@@ -9,14 +9,12 @@
 "use strict";
 // framerate
 let fr = 12;
-
 // background color properties
 let bg = {
     h: 180,
     s: 50,
     b: 50
 };
-
 // frame properties
 let frame = {
     h: 0,
@@ -36,15 +34,13 @@ let interF;
 let interG;
 let interH;
 let interI;
-
 // wave properties
 let wave = {
     curveHeight: 50,
     curveWidth: 0.08,
     size: 10,
     alpha: 0.5
-}
-
+};
 // noise properties
 let noise = {
     amount: 1000,
@@ -54,8 +50,26 @@ let noise = {
     pointSize: 2,
     area: 0.15
 };
-
+let coolville;
+let deco1;
+let deco2;
+let deco3;
+let deco4;
+let starImg;
 let state = `quiz`; 
+
+function preload() {
+    // load font
+    coolville = loadFont('assets/fonts/Coolville.ttf');
+    // load images for decorations
+    deco1 = loadImage('assets/images/deco1.png');
+    deco2 = loadImage('assets/images/deco2.png');
+    deco3 = loadImage('assets/images/deco3.png');
+    deco4 = loadImage('assets/images/deco4.png');
+
+    // load image for cursor icon
+    starImg = loadImage('assets/images/star.png');
+}
 
 function setup() {
     createCanvas(1000, 1000);
@@ -67,6 +81,7 @@ function setup() {
 function draw() {
     if (state === `quiz`) {
         quizBackground();
+        quizText();
         cursorStar();
     }
     else if (state === `ending`) {
@@ -77,57 +92,64 @@ function draw() {
 
 function quizBackground() {
     background(0);
-    // draws noise
+    // draws noise ...
     for (let i = 0; i < 200; i++) {
         let randomColor = color(random(0, 360), random(0, 100), random(0, 100));
         stroke(randomColor);
         strokeWeight(3);
-        // top left corner
+        // ... in top left corner
         let x = randomGaussian(0, width*0.15);
         let y = randomGaussian(0, width*0.15);
         point(x, y);
-        // bottom left corner
+        // ... in bottom left corner
         x = randomGaussian(0, width*0.1);
         y = randomGaussian(height, width*0.15);
         point(x, y);
-        // top right corner
+        // ... in top right corner
         x = randomGaussian(width, width*0.15);
         y = randomGaussian(0, width*0.1);
         point(x, y);
-        // bottom right corner
+        // ... and in bottom right corner
         x = randomGaussian(width, width*0.15);
         y = randomGaussian(height, width*0.15);
         point(x, y);
     };
-    // draws starlight trail
+    // places star decorations
+    push();
+    imageMode(CENTER);
+    image(deco1, 100, 200);
+    image(deco2, 800, 700);
+    image(deco3, 900, 300);
+    image(deco4, 300, 900);
+    pop();
+
+    // draws starlight trail following mouse
     for (let i = 0; i < 10; i++) {
         stroke(60, 80, 100);
         strokeWeight(2);
-        // following mouse
         let x = random(mouseX, pmouseX);
         let y = random(mouseY + 5, pmouseY + 5);
         point(x, y);
     }
 }
 
-function cursorStar() {
+function quizText() {
     push();
-    stroke(0);
-    strokeWeight(1);
-    fill(60, 80, 100);
-    beginShape();
-    vertex(mouseX, mouseY); // point 1
-    vertex(mouseX + 5, mouseY + 10);
-    vertex(mouseX + 15, mouseY + 10); // point 2
-    vertex(mouseX + 7.5, mouseY + 17.5);
-    vertex(mouseX + 12.5, mouseY + 30); // point 3
-    vertex(mouseX, mouseY + 22.5);
-    vertex(mouseX - 12.5, mouseY + 30); // point 4
-    vertex(mouseX - 7.5, mouseY + 17.5);
-    vertex(mouseX - 15, mouseY + 10); // point 5
-    vertex(mouseX - 5, mouseY + 10);
-    endShape(CLOSE);
-    pop();
+    noStroke();
+    textFont('Pixelify Sans');
+    rectMode(CORNER);
+    textAlign(LEFT, BOTTOM);
+    fill(100);
+    textSize(32);
+    text(`Question question question question?`, width/5, height/3, 2*width/3);
+    text(`Answer!`, width/5, 500, 3*width/4);
+    text(`Answer...`, width/5, 600, 3*width/4);
+    text(`Answer answer.`, width/5, 700, 3*width/4);
+}
+
+function cursorStar() {
+    imageMode(CENTER);
+    image(starImg, mouseX, mouseY);
 }
 
 function drawFinalImage() {
