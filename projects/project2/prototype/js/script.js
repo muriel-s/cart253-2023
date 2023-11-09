@@ -20,8 +20,8 @@ let bg = {
 
 // frame properties
 let frame = {
-    h: 0,
-    s: 50,
+    h: 180,
+    s: 0,
     b: 50,
     thickness: 200,
     minThickness: 50,
@@ -38,21 +38,15 @@ let noise = {
     area: 0.15
 }
 
-// // circle pattern properties
-// let circles = {
-//     thickness: 1,
-//     h: 180,
-//     s: 100,
-//     b: 100,
-//     x: 0,
-//     y: 0,
-//     size: 0,
-//     minSize: 250,
-//     maxSize: 1000,
-//     spacing: 0,
-//     amount: 1,
-//     variation: 20
-// }
+let interA;
+let interB;
+let interC;
+let interD;
+let interE;
+let interF;
+let interG;
+let interH;
+let interI;
 
 function setup() {
     createCanvas(1000, 1000);
@@ -66,69 +60,25 @@ function draw() {
     background(backgroundColor);
 
     // draws frame
+    let frameColor = color(frame.h, frame.s, frame.b);
     noFill();
     rectMode(CENTER);
-    let frameColor = color(frame.h, frame.s, frame.b);
-    
-    let interA = lerpColor(frameColor, backgroundColor, 0.1);
-    let interB = lerpColor(frameColor, backgroundColor, 0.2);
-    let interC = lerpColor(frameColor, backgroundColor, 0.3);
-    let interD = lerpColor(frameColor, backgroundColor, 0.4);
-    let interE = lerpColor(frameColor, backgroundColor, 0.5);
-    let interF = lerpColor(frameColor, backgroundColor, 0.6);
-    
-    strokeWeight(lerp(frame.minThickness, frame.thickness, 0.6));
-    stroke(interF);
-    rect(width/2, height/2, frame.width);
 
-    strokeWeight(lerp(frame.minThickness, frame.thickness, 0.5));
-    stroke(interE);
-    rect(width/2, height/2, frame.width);
+    // draws the blend from frame to bg
+    createInterColor(interI, 0.9);
+    createInterColor(interH, 0.8);
+    createInterColor(interG, 0.7);
+    createInterColor(interF, 0.6);
+    createInterColor(interE, 0.5);
+    createInterColor(interD, 0.4);
+    createInterColor(interC, 0.3);
+    createInterColor(interB, 0.2);
+    createInterColor(interA, 0.1);
 
-    strokeWeight(lerp(frame.minThickness, frame.thickness, 0.4));
-    stroke(interD);
-    rect(width/2, height/2, frame.width);
-
-    strokeWeight(lerp(frame.minThickness, frame.thickness, 0.3));
-    stroke(interC);
-    rect(width/2, height/2, frame.width);
-
-    strokeWeight(lerp(frame.minThickness, frame.thickness, 0.2));
-    stroke(interB);
-    rect(width/2, height/2, frame.width);
-
-    strokeWeight(lerp(frame.minThickness, frame.thickness, 0.1));
-    stroke(interA);
-    rect(width/2, height/2, frame.width);
-
+    // draws outer frame
     strokeWeight(frame.minThickness);
     stroke(frameColor);
     rect(width/2, height/2, frame.width);
-
-
-    // // draws ellipse pattern
-    // circles.size = lerp(circles.minSize, circles.maxSize, 0.5);
-    // circles.spacing = circles.thickness*20;
-    // for (let i = 0; i < circles.amount; i++) {
-    //     push();
-    //     noFill();
-    //     circles.x = width/2;
-    //     circles.y = height/2;
-    //     circles.size = randomGaussian(circles.size, circles.size/circles.variation);
-    //     circles.size = constrain(circles.size, circles.minSize, circles.maxSize);
-    //     // // back-level of ellipse
-    //     // strokeWeight(3*circles.thickness);
-    //     // let hue = lerp(circles.h, bg.h, 0,75);
-    //     // let saturation = lerp(circles.s, bg.s, 0,75);
-    //     // let brightness = lerp(circles.b, bg.b, 0,75);
-    //     // stroke(hue, saturation, brightness);
-    //     // ellipse(circles.x, circles.y, circles.size);
-    //     // normal ellipse
-    //     strokeWeight(circles.thickness);
-    //     stroke(circles.h, circles.s, circles.b);
-    //     ellipse(circles.x, circles.y, circles.size);
-    //     pop();
-    // }
 
     // draws base-layer of noise
     for (let i = 0; i < noise.amount; i++) {
@@ -162,4 +112,14 @@ function draw() {
         strokeWeight(noise.pointSize);
         point(x, y);
     }
+}
+
+function createInterColor(interLetter, lerpAmt) {
+    let frameColor = color(frame.h, frame.s, frame.b);
+    let backgroundColor = color(bg.h, bg.s, bg.b);
+    interLetter = lerpColor(frameColor, backgroundColor, lerpAmt);
+    // return interLetter;
+    strokeWeight(lerp(frame.minThickness, frame.thickness, lerpAmt));
+    stroke(interLetter);
+    rect(width/2, height/2, frame.width);
 }
