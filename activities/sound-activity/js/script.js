@@ -1,6 +1,6 @@
 /**
- * Title of Project
- * Author Name
+ * Sound Activity
+ * Muriel
  * 
  * This is a template. You must fill in the title, author, 
  * and this description to match your project!
@@ -8,25 +8,33 @@
 
 "use strict";
 
-/**
- * Description of preload
-*/
+let balls = [];
+
 function preload() {
 
 }
 
-
-/**
- * Description of setup
-*/
 function setup() {
-
+    createCanvas(600,600);
 }
 
-
-/**
- * Description of draw()
-*/
 function draw() {
+    background(0);
 
+    for (let i = 0; i < balls.length; i++) {
+        let ball = balls[i];
+        ball.move();
+        ball.bounce();
+        ball.display();
+    }
+    
+}
+
+function createBall(x, y) {
+    let ball = new Ball(x, y);
+    balls.push(ball);
+}
+
+function mousePressed() {
+    createBall(mouseX, mouseY);
 }
