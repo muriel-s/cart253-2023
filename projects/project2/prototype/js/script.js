@@ -116,6 +116,7 @@ function quizBackground() {
     };
     // places star decorations
     push();
+    tint(50, 40, 100, 50);
     imageMode(CENTER);
     image(deco1, 100, 200);
     image(deco2, 800, 700);
