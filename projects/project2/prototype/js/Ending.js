@@ -1,7 +1,5 @@
 class Ending {
     constructor() {
-        // frame rate
-        this.fr = 12;
         // background color properties
         this.bg = {
             h: undefined,
@@ -30,6 +28,8 @@ class Ending {
         this.noiseAmount = undefined;
         this.noisePointSize = undefined;
         this.noiseArea = undefined;
+        // frame rate
+        frameRate(12);
     }
 
     draw() {

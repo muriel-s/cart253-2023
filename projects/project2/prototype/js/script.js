@@ -7,18 +7,19 @@
 
 "use strict";
 
-let coolville;
-let deco1;
-let deco2;
-let deco3;
-let deco4;
-let starImg;
+var coolville;
+var deco1;
+var deco2;
+var deco3;
+var deco4;
+var starImg;
 
 let currentState; 
 
 function preload() {
     // load font
     coolville = loadFont('assets/fonts/Coolville.ttf');
+
     // load images for decorations
     deco1 = loadImage('assets/images/deco1.png');
     deco2 = loadImage('assets/images/deco2.png');
