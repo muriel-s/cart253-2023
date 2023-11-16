@@ -1,21 +1,16 @@
 /**
  * Sound Activity
  * Muriel
- * 
- * This is a template. You must fill in the title, author, 
- * and this description to match your project!
  */
 
 "use strict";
 
 let balls = [];
-
-function preload() {
-
-}
+let notes = [`G3`, `A3`, `B3`, `C4`, `D4`, `E4`, `F4`];
 
 function setup() {
     createCanvas(600,600);
+    userStartAudio();
 }
 
 function draw() {
@@ -26,15 +21,15 @@ function draw() {
         ball.move();
         ball.bounce();
         ball.display();
-    }
-    
-}
-
-function createBall(x, y) {
-    let ball = new Ball(x, y);
-    balls.push(ball);
+    } 
 }
 
 function mousePressed() {
     createBall(mouseX, mouseY);
+}
+
+function createBall(x, y) {
+    let note = random(notes);
+    let ball = new Ball(x, y, note);
+    balls.push(ball);
 }
