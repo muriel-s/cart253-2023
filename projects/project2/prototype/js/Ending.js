@@ -2,38 +2,38 @@ class Ending {
     constructor() {
         // background color properties
         this.bg = {
-            h: undefined,
-            s: undefined,
-            b: undefined,
+            h: 360,
+            s: 0,
+            b: 0,
         };
         // frame properties
         this.frame = {
-            h: undefined,
-            s: undefined,
-            b: undefined,
+            h: 0,
+            s: 0,
+            b: 100,
         };
         this.frameThickness = 200;
         this.frameMinThickness = 50;
         // wave properties
-        this.waveHeight = undefined;
-        this.waveWidth = undefined;
-        this.waveSize = undefined;
-        this.waveAlpha = undefined;
+        this.waveHeight = 50;
+        this.waveWidth = 0.08;
+        this.waveSize = 10;
+        this.waveAlpha = 1;
         // noise properties
         this.noise = {
-            h: undefined,
-            s: undefined,
-            b: undefined,
+            h: 0,
+            s: 0,
+            b: 0,
         };
-        this.noiseAmount = undefined;
-        this.noisePointSize = undefined;
-        this.noiseArea = undefined;
+        this.noiseAmount = 1000;
+        this.noisePointSize = 4;
+        this.noiseArea = 0.05;
         // frame rate
         frameRate(12);
     }
 
     draw() {
-        background(this.this.bg.h, this.this.bg.s, this.this.bg.b);
+        background(this.bg.h, this.bg.s, this.bg.b);
         this.drawFrame();
         this.drawWave();
         this.drawNoise()
@@ -84,14 +84,14 @@ class Ending {
         noStroke();
         fill(this.frame.h, this.frame.s, this.frame.b, this.waveAlpha);
         beginShape();
-        for (let i = 0; i < 1000; i++) {
+        for (let i = 0; i < width; i++) {
             let x = i;
-            let y = this.waveHeight * sin(x * this.waveWidth) + 500 + -this.waveSize;
+            let y = this.waveHeight * sin(x * this.waveWidth) + height/2 + -this.waveSize;
             vertex(x, y);
         };
-        for (let i = 1000; i > 0; i--) {
+        for (let i = width; i > 0; i--) {
             let x = i;
-            let y = this.waveHeight * sin(x * this.waveWidth) + 500 + this.waveSize;
+            let y = this.waveHeight * sin(x * this.waveWidth) + height/2 + this.waveSize;
             vertex(x, y);
         };
         endShape(CLOSE);

@@ -10,6 +10,8 @@ class Quiz {
         this.answer2Height = 525;
         this.answer3Height = 650;
         this.answer4Height = 775;
+        // checking current question
+        this.currentQuestion = 0;
     }
 
     draw() {
@@ -62,41 +64,40 @@ class Quiz {
         textSize(32);
         // question
         fill(this.questionColor);
-        text(`Question question question question?`, width/5, this.questionHeight, 2*width/3);
+        text(QuizQuestions[this.currentQuestion][0], width/5, this.questionHeight, 2*width/3);
 
         // answer 1
-        if (mouseY > this.answer1Height - 25 && mouseY < this.answer1Height + 15) {
-            fill(this.answerSelectColor);
-        } else {
-            fill(this.answerColor);
-        }
-        text(`Answer!`, width/5, this.answer1Height, 3*width/4);
+        this.textColorChange(this.answer1Height);
+        text(QuizQuestions[this.currentQuestion][1], width/5, this.answer1Height, 3*width/4);
         // answer 2
-        if (mouseY > this.answer2Height - 25 && mouseY < this.answer2Height + 15) {
-            fill(this.answerSelectColor);
-        } else {
-            fill(this.answerColor);
-        }
-        text(`Answer...`, width/5, this.answer2Height, 3*width/4);
+        this.textColorChange(this.answer2Height);
+        text(QuizQuestions[this.currentQuestion][2], width/5, this.answer2Height, 3*width/4);
         // answer 3
-        if (mouseY > this.answer3Height - 25 && mouseY < this.answer3Height + 15) {
-            fill(this.answerSelectColor);
-        } else {
-            fill(this.answerColor);
-        }
-        text(`Answer answer.`, width/5, this.answer3Height, 3*width/4);
+        this.textColorChange(this.answer3Height);
+        text(QuizQuestions[this.currentQuestion][3], width/5, this.answer3Height, 3*width/4);
         // answer 4
-        if (mouseY > this.answer4Height - 25 && mouseY < this.answer4Height + 15) {
+        this.textColorChange(this.answer4Height);
+        text(QuizQuestions[this.currentQuestion][4], width/5, this.answer4Height, 3*width/4);
+        pop();
+    }
+
+    textColorChange(answerNum) {
+        if (mouseY > answerNum - 25 && mouseY < answerNum + 15) {
             fill(this.answerSelectColor);
         } else {
             fill(this.answerColor);
         }
-        text(`Answer answer answer.`, width/5, this.answer4Height, 3*width/4);
-        pop();
     }
 
     cursorStar() {
         imageMode(CENTER);
         image(starImg, mouseX, mouseY);
+    }
+
+    mousePressed() {
+        this.currentQuestion++;
+        if (this.currentQuestion >= QuizQuestions.length) {
+            currentState = new Ending();
+        }
     }
 }
