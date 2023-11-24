@@ -4,7 +4,7 @@ class Quiz {
         this.questionColor = color(60, 58, 94);
         this.answerColor = 100;
         this.answerSelectColor = color(60, 58, 94);
-        // text position properties
+        // text Y position properties
         this.questionHeight = height/4;
         this.answer1Height = 400;
         this.answer2Height = 525;
@@ -12,6 +12,8 @@ class Quiz {
         this.answer4Height = 775;
         // checking current question
         this.currentQuestion = 0;
+
+        frameRate(12);
     }
 
     draw() {
@@ -55,6 +57,7 @@ class Quiz {
         }
     }
 
+    // displays questions and answers
     quizText() {
         push();
         noStroke();
@@ -67,36 +70,48 @@ class Quiz {
         text(QuizQuestions[this.currentQuestion][0], width/5, this.questionHeight, 2*width/3);
 
         // answer 1
-        this.textColorChange(this.answer1Height);
-        text(QuizQuestions[this.currentQuestion][1], width/5, this.answer1Height, 3*width/4);
+        answer1 = QuizQuestions[this.currentQuestion][1];
+        this.textColorChange(this.answer1Height, answer1);
+        text(answer1, width/5, this.answer1Height, 3*width/4);
         // answer 2
-        this.textColorChange(this.answer2Height);
-        text(QuizQuestions[this.currentQuestion][2], width/5, this.answer2Height, 3*width/4);
+        answer2 = QuizQuestions[this.currentQuestion][2];
+        this.textColorChange(this.answer2Height, answer2);
+        text(answer2, width/5, this.answer2Height, 3*width/4);
         // answer 3
-        this.textColorChange(this.answer3Height);
-        text(QuizQuestions[this.currentQuestion][3], width/5, this.answer3Height, 3*width/4);
+        answer3 = QuizQuestions[this.currentQuestion][3];
+        this.textColorChange(this.answer3Height, answer3);
+        text(answer3, width/5, this.answer3Height, 3*width/4);
         // answer 4
-        this.textColorChange(this.answer4Height);
-        text(QuizQuestions[this.currentQuestion][4], width/5, this.answer4Height, 3*width/4);
+        answer4 = QuizQuestions[this.currentQuestion][4];
+        this.textColorChange(this.answer4Height, answer4);
+        text(answer4, width/5, this.answer4Height, 3*width/4);
         pop();
     }
 
-    textColorChange(answerNum) {
-        if (mouseY > answerNum - 25 && mouseY < answerNum + 15) {
+    // changes the text color of the answers when the mouse hovers over them
+    textColorChange(answerHeight, answerNum) {
+        if (mouseY > answerHeight - 25 && mouseY < answerHeight + 25) {
             fill(this.answerSelectColor);
+            if (mousePressed) {
+                selectedAnswers.push(answerNum);
+            };
         } else {
             fill(this.answerColor);
         }
     }
 
+    // represents the cursor as a cute star
     cursorStar() {
         imageMode(CENTER);
         image(starImg, mouseX, mouseY);
     }
 
     mousePressed() {
+        // switches over to next question ...
         this.currentQuestion++;
+        // ... until questions run out ...
         if (this.currentQuestion >= QuizQuestions.length) {
+            // ... then Quiz ends
             currentState = new Ending();
         }
     }

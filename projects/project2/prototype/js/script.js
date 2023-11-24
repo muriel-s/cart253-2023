@@ -19,6 +19,13 @@ let QuizQuestions = [
     [`You're in the bathroom at a club and someone is crying with their friend about their recent breakup. What do you do?`, `Give them privacy.`, `Say something nice then leave.`, `Get into a deep conversation that ends with you complimenting each other before going back out to never meet again.`]
 ];
 
+var answer1;
+var answer2;
+var answer3;
+var answer4;
+
+var selectedAnswers = [];
+
 function preload() {
     // load font
     coolville = loadFont('assets/fonts/Coolville.ttf');

@@ -42,6 +42,7 @@ class Title {
         // cyan offset
         fill(180, 100, 100);
         text(this.introText, width/2 + 1, height/2);
+        // white text
         fill(100);
         text(this.introText, width/2, height/2);
         pop();

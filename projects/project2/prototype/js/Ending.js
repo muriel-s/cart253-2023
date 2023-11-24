@@ -30,13 +30,14 @@ class Ending {
         this.noiseArea = 0.05;
         // frame rate
         frameRate(12);
+        console.log(selectedAnswers);
     }
 
     draw() {
         background(this.bg.h, this.bg.s, this.bg.b);
         this.drawFrame();
         this.drawWave();
-        this.drawNoise()
+        this.drawNoise();
     }
 
     drawFrame() {
@@ -72,7 +73,7 @@ class Ending {
 
     createInterColor(interLetter, lerpAmt) {
         let frameColor = color(this.frame.h, this.frame.s, this.frame.b);
-        let backgroundColor = color(this.this.bg.h, this.this.bg.s, this.this.bg.b);
+        let backgroundColor = color(this.bg.h, this.bg.s, this.bg.b);
         interLetter = lerpColor(frameColor, backgroundColor, lerpAmt);
         strokeWeight(lerp(this.frameMinThickness, this.frameThickness, lerpAmt));
         stroke(interLetter);
@@ -131,47 +132,3 @@ class Ending {
         };
     }
 }
-
-// // framerate
-// let fr = 12;
-// // background color properties
-// let bg = {
-//     h: 180,
-//     s: 50,
-//     b: 50
-// };
-// // frame properties
-// let frame = {
-//     h: 0,
-//     s: 0,
-//     b: 50,
-//     thickness: 200,
-//     minThickness: 50,
-//     width: 1000
-// };
-// // frame blending
-// let interA;
-// let interB;
-// let interC;
-// let interD;
-// let interE;
-// let interF;
-// let interG;
-// let interH;
-// let interI;
-// // wave properties
-// let wave = {
-//     curveHeight: 50,
-//     curveWidth: 0.08,
-//     size: 10,
-//     alpha: 0.5
-// };
-// // noise properties
-// let noise = {
-//     amount: 1000,
-//     hue: 180,
-//     saturation: 0,
-//     brightness: 100,
-//     pointSize: 2,
-//     area: 0.15
-// }
