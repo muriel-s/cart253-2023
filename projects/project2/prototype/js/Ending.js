@@ -12,8 +12,8 @@ class Ending {
             s: trusting,
             b: cautious,
         };
-        this.frameThickness = 200;
-        this.frameMinThickness = 50;
+        this.frameThickness = 300;
+        this.frameMinThickness = 75;
         // wave properties
         this.waveHeight = playful;
         this.waveWidth = relaxed;
@@ -28,27 +28,30 @@ class Ending {
         this.noiseAmount = excitable;
         this.noisePointSize = sophisticated;
         this.noiseArea = ambitious;
-        // frame rate
-        frameRate(12);
+        // helpful info
         console.log(selectedAnswers);
-
+        console.log(`frame saturation: ` + trusting);
+        console.log(`frame brightness: ` + cautious);
+        console.log(`noise saturation: ` + instinctive);
+        console.log(`wave size: ` + thoughtful);
+        console.log(`noise brightness: ` + straightforward);
+        console.log(`noise point size: ` + sophisticated);
+        console.log(`wave alpha: ` + sensitive);
+        console.log(`background hue: ` + hardy);
+        console.log(`noise area: ` + ambitious);
+        console.log(`background brightness: ` + content);
+        console.log(`background saturation: ` + earnest);
+        console.log(`frame hue: ` + cool);
+        console.log(`wave height: ` + playful);
+        console.log(`noise hue: ` + efficient);
+        console.log(`wave width: ` + relaxed);
+        console.log(`noise amount: ` + excitable);
     }
 
     draw() {
-        // this.rangeTraits();
         background(this.bg.h, this.bg.s, this.bg.b);
         this.drawFrame();
-        this.drawWave();
         this.drawNoise();
-    }
-
-    createInterColor(interLetter, lerpAmt) {
-        let frameColor = color(this.frame.h, this.frame.s, this.frame.b);
-        let backgroundColor = color(this.bg.h, this.bg.s, this.bg.b);
-        interLetter = lerpColor(frameColor, backgroundColor, lerpAmt);
-        strokeWeight(lerp(this.frameMinThickness, this.frameThickness, lerpAmt));
-        stroke(interLetter);
-        rect(width/2, height/2, this.frameWidth);
     }
 
     drawFrame() {
@@ -77,6 +80,15 @@ class Ending {
         // draws outer frame
         strokeWeight(this.frameMinThickness);
         stroke(this.frame.h, this.frame.s, this.frame.b);
+        rect(width/2, height/2, width);
+    }
+
+    createInterColor(interLetter, lerpAmt) {
+        let frameColor = color(this.frame.h, this.frame.s, this.frame.b);
+        let backgroundColor = color(this.bg.h, this.bg.s, this.bg.b);
+        interLetter = lerpColor(frameColor, backgroundColor, lerpAmt);
+        strokeWeight(lerp(this.frameMinThickness, this.frameThickness, lerpAmt));
+        stroke(interLetter);
         rect(width/2, height/2, width);
     }
 
@@ -122,6 +134,8 @@ class Ending {
             strokeWeight(this.noisePointSize);
             point(x, y);
         };
+        // draws wave behind noise, in front of back layers noise
+        this.drawWave();
         // draws noise
         for (let i = 0; i < this.noiseAmount; i++) {
             let x = randomGaussian(width/2, width*this.noiseArea);
@@ -131,25 +145,6 @@ class Ending {
             point(x, y);
         };
     }
-
-    // rangeTraits() {
-    //     trusting = map(trusting, 0, 22, 0, 100);
-    //     cautious = map(cautious, 0, 22, 100, 0);
-    //     instinctive = map(instinctive, 0, 16, 0, 100);
-    //     thoughtful = map(thoughtful, 0, 18, 10, 100);
-    //     straightforward = map(straightforward, 0, 8, 0, 100);
-    //     sophisticated = map(sophisticated, 0, 12, 4, 1);
-    //     sensitive = map(sensitive, 0, 6, 1, 0.5);
-    //     hardy = map(hardy, 0, 4, 360, 0);
-    //     ambitious = map(ambitious, 0, 2, 0.05, 0.25);
-    //     content = map(content, 0, 6, 0, 100);
-    //     earnest = map(earnest, 0, 4, 0, 100);
-    //     cool = map(cool, 0, 4, 0, 360);
-    //     playful = map(playful, 0, 18, 50, 200);
-    //     efficient = map(efficient, 0, 10, 0, 360);
-    //     relaxed = map(relaxed, 0, 8, 0.08, 0.02);
-    //     excitable = map(excitable, 0, 2, 1000, 6000);
-    // }
 
     mousePressed() {
 

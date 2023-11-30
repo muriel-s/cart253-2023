@@ -2,10 +2,15 @@ class Title {
     constructor() {
         this.titleString = `Aura Generator`;
         this.introText = `Click anywhere to begin`;
+        this.bg = {
+            h: 0,
+            s: 0,
+            b: 0
+        };
     }
 
     draw() {
-        background(0); // later set a dark color-changing bg
+        background(this.bg.h, this.bg.s, this.bg.b);
         this.displayTitle();
         this.displayIntroText();
     }
