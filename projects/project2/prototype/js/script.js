@@ -7,6 +7,7 @@
 
 "use strict";
 
+var bgSong;
 var coolville;
 var starImg;
 
@@ -61,6 +62,8 @@ var relaxed = 0;
 var excitable = 0;
 
 function preload() {
+    // load music
+    bgSong = loadSound(`assets/sounds/aura-generator-music.m4a`);
     // load font
     coolville = loadFont('assets/fonts/Coolville.ttf');
     // load image for cursor icon
@@ -73,6 +76,10 @@ function setup() {
     frameRate(12);
     noCursor();
     console.table(QuizQuestions);
+
+    userStartAudio();
+    bgSong.play();
+    bgSong.loop();
 
     currentState = new Title();
 }
