@@ -43,13 +43,13 @@ class Title {
         textSize(48);
         // red offset
         fill(0, 100, 100);
-        text(this.introText, width/2 - 1, height/2);
+        text(this.introText, width/2 - 1, 4*height/5);
         // cyan offset
         fill(180, 100, 100);
-        text(this.introText, width/2 + 1, height/2);
+        text(this.introText, width/2 + 1, 4*height/5);
         // white text
         fill(100);
-        text(this.introText, width/2, height/2);
+        text(this.introText, width/2, 4*height/5);
         pop();
     }
 

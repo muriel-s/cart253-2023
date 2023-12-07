@@ -52,6 +52,22 @@ class Ending {
         background(this.bg.h, this.bg.s, this.bg.b);
         this.drawFrame();
         this.drawNoise();
+
+        let tooltip = `click to save as GIF`;
+        let w = textWidth(tooltip);
+        push();
+        fill(0, 0, 80);
+        stroke(0, 0, 40);
+        strokeWeight(1);
+        rectMode(CORNER);
+        rect(mouseX, mouseY, w*2, 30);
+        textAlign(LEFT, TOP);
+        textFont('Pixelify Sans');
+        textSize(20);
+        noStroke();
+        fill(0);
+        text(tooltip, mouseX + 5, mouseY + 5);
+        pop();
     }
 
     drawFrame() {
