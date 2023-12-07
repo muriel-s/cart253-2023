@@ -150,27 +150,26 @@ class Quiz {
     // adds selected answers to array holding them
     mousePressed() {
         if (this.isSelected(this.answer1Height)) {
-            selectedAnswers.push(answer1);
-            this.traits();
-            this.currentQuestion++;
+            this.answerSelectEvent(answer1);
         } else if (this.isSelected(this.answer2Height)) {
-            selectedAnswers.push(answer2);
-            this.traits();
-            this.currentQuestion++;
+            this.answerSelectEvent(answer2);
         } else if (this.isSelected(this.answer3Height)) {
-            selectedAnswers.push(answer3);
-            this.traits();
-            this.currentQuestion++;
+            this.answerSelectEvent(answer3);
         } else if (this.isSelected(this.answer4Height)) {
-            selectedAnswers.push(answer4);
-            this.traits();
-            this.currentQuestion++;
+            this.answerSelectEvent(answer4);
         };
         
         if (this.currentQuestion >= QuizQuestions.length) {
             this.rangeTraits();
             currentState = new Ending();
         };
+    }
+
+    answerSelectEvent(answerNum) {
+        eventSound.play(`B6`, 0.4, 0, 0.2);
+        selectedAnswers.push(answerNum);
+        this.traits();
+        this.currentQuestion++;
     }
 
     traits() {
@@ -188,66 +187,66 @@ class Quiz {
         };
         
         if (this.currentQuestion === 1) {
-            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[1]) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
                 relaxed = relaxed + 4;
                 hardy = hardy + 2;
-            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[1]) {
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
                 content = content + 2;
-            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[1]) {
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
                 thoughtful = thoughtful + 2;
                 excitable = excitable + 2;
             };
         };
         
         if (this.currentQuestion === 2) {
-            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[2]) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
                 playful = playful + 4;
-            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[2]) {
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
                 thoughtful = thoughtful + 4;
                 efficient = efficient + 4;
-            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[2]) {
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
                 instinctive = instinctive + 2;
                 excitable = excitable + 2;
             };
         };
 
         if (this.currentQuestion === 3) {
-            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[3]) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
                 thoughtful = thoughtful + 2;
                 hardy = hardy + 2;
                 cool = cool + 4;
-            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[3]) {
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
                 sophisticated = sophisticated + 4;
                 sensitive = sensitive + 4;
-            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[3]) {
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
                 instinctive = instinctive + 2;
                 trusting = trusting + 4;
                 earnest = earnest + 4;
-            } else if (QuizQuestions[this.currentQuestion][4] === selectedAnswers[3]) {
+            } else if (QuizQuestions[this.currentQuestion][4] === selectedAnswers[this.currentQuestion]) {
                 cool = cool + 2;
             };
         };
 
         if (this.currentQuestion === 4) {
-            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[4]) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
                 cautious = cautious + 4;
                 sensitive = sensitive + 2;
-            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[4]) {
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
                 straightforward = straightforward + 4;
-            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[4]) {
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
                 thoughtful = thoughtful + 2;
                 trusting = trusting + 4;
-            } else if (QuizQuestions[this.currentQuestion][4] === selectedAnswers[4]) {
+            } else if (QuizQuestions[this.currentQuestion][4] === selectedAnswers[this.currentQuestion]) {
                 instinctive = instinctive + 2;
             };
         };
 
         if (this.currentQuestion === 5) {
-            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[5]) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
                 playful = playful + 4;
                 trusting = trusting + 2;
                 relaxed = relaxed + 2;
-            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[5]) {
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
                 thoughtful = thoughtful + 2;
                 cautious = cautious + 2;
                 excitable = excitable + 2;
@@ -255,228 +254,504 @@ class Quiz {
         };
 
         if (this.currentQuestion === 6) {
-            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[6]) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
                 thoughtful = thoughtful + 2;
-            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[6]) {
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
                 instinctive = instinctive + 2;
                 playful = playful + 2;
-            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[6]) {
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
                 cautious = cautious + 2;
-            } else if (QuizQuestions[this.currentQuestion][4] === selectedAnswers[6]) {
+            } else if (QuizQuestions[this.currentQuestion][4] === selectedAnswers[this.currentQuestion]) {
                 efficient = efficient + 2;
             };
         };
 
         if (this.currentQuestion === 7) {
-            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[7]) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
                 instinctive = instinctive + 4;
-            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[7]) {
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
                 content = content + 2;
                 cautious = cautious + 2;
-            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[7]) {
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
                 thoughtful = thoughtful + 2;
                 sophisticated = sophisticated + 2;
             };
         };
 
         if (this.currentQuestion === 8) {
-            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[8]) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
                 cool = cool + 4;
                 sophisticated = sophisticated + 4;
-            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[8]) {
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
                 thoughtful = thoughtful + 2;
-            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[8]) {
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
                 earnest = earnest + 4;
                 straightforward = straightforward + 4;
-            } else if (QuizQuestions[this.currentQuestion][4] === selectedAnswers[8]) {
+            } else if (QuizQuestions[this.currentQuestion][4] === selectedAnswers[this.currentQuestion]) {
                 sensitive = sensitive + 2;
                 cautious = cautious + 2;
             };
         };
 
         if (this.currentQuestion === 9) {
-            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[9]) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
                 instinctive = instinctive + 2;
                 playful = playful + 2;
                 excitable = excitable + 2;
-            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
                 trusting = trusting + 4;
                 ambitious = ambitious + 2;
-            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
                 thoughtful = thoughtful + 2;
                 content = content + 2;
-            } else if (QuizQuestions[this.currentQuestion][4] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][4] === selectedAnswers[this.currentQuestion]) {
                 cautious = cautious + 4;
             };
         };
 
         if (this.currentQuestion === 10) {
-            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[9]) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
                 hardy = hardy + 2;
                 straightforward = straightforward + 2;
-            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
                 trusting = trusting + 2;
                 thoughtful = thoughtful + 2;
                 sensitive = sensitive + 2;
-            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
                 sophisticated = sophisticated + 2;
             };
         };
 
         if (this.currentQuestion === 11) {
-            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[9]) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
                 content = content + 4;
                 efficient = efficient + 2;
-            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
                 trusting = trusting + 2;
                 ambitious = ambitious + 2;
                 playful = playful + 4;
-            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
                 instinctive = instinctive + 2;
             };
         };
 
         if (this.currentQuestion === 12) {
-            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[9]) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
                 trusting = trusting + 4;
                 sophisticated = sophisticated + 4;
-            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
                 thoughtful = thoughtful + 4;
-            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
                 cautious = cautious + 2;
                 instinctive = instinctive + 2;
-            } else if (QuizQuestions[this.currentQuestion][4] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][4] === selectedAnswers[this.currentQuestion]) {
                 content = content + 4;
                 cool = cool + 4;
             };
         };
 
         if (this.currentQuestion === 13) {
-            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[9]) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
                 relaxed = relaxed + 2;
                 playful = playful + 2;
-            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
                 earnest = earnest + 2;
                 sophisticated = sophisticated + 2;
-            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
                 instinctive = instinctive + 2;
                 ambitious = ambitious + 4;
             };
         };
 
         if (this.currentQuestion === 14) {
-            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[9]) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
                 instinctive = instinctive + 2;
                 ambitious = ambitious + 2;
-            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
                 straightforward = straightforward + 4;
                 content = content + 4;
-            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
                 cautious = cautious + 4;
                 hardy = hardy + 2;
-            } else if (QuizQuestions[this.currentQuestion][4] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][4] === selectedAnswers[this.currentQuestion]) {
                 sensitive = sensitive + 4;
                 excitable = excitable + 4;
             };
         };
 
         if (this.currentQuestion === 15) {
-            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[9]) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
                 earnest = earnest + 4;
                 sensitive = sensitive + 2;
-            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
                 instinctive = instinctive + 2;
                 playful = playful + 2;
-            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
                 thoughtful = thoughtful + 2;
                 hardy = hardy + 2;
-            } else if (QuizQuestions[this.currentQuestion][4] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][4] === selectedAnswers[this.currentQuestion]) {
                 straightforward = straightforward + 4;
                 efficient = efficient + 2;
             };
         };
 
         if (this.currentQuestion === 16) {
-            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[9]) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
                 trusting = trusting + 4;
                 hardy = hardy + 4;
-            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
                 cautious = cautious + 4;
                 sensitive = sensitive + 4;
-            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
                 thoughtful = thoughtful + 2;
                 cool = cool + 2;
             };
         };
 
         if (this.currentQuestion === 17) {
-            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[9]) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
                 trusting = trusting + 4;
                 ambitious = ambitious + 4;
-            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
                 cautious = cautious + 2;
                 excitable = excitable + 2;
-            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
                 relaxed = relaxed + 4;
                 content = content + 2;
             };
         };
 
         if (this.currentQuestion === 18) {
-            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[9]) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
                 instinctive = instinctive + 4;
                 earnest = earnest + 4;
                 straightforward = straightforward + 2;
-            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
                 thoughtful = thoughtful + 2;
                 cool = cool + 4;
                 sophisticated = sophisticated + 4;
-            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
                 excitable = excitable + 4;
             };
         };
 
         if (this.currentQuestion === 19) {
-            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[9]) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
                 instinctive = instinctive + 4;
                 excitable = excitable + 4;
-            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
                 trusting = trusting + 2;
-            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
                 relaxed = relaxed + 4;
                 hardy = hardy + 4;
             };
         };
 
         if (this.currentQuestion === 20) {
-            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[9]) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
                 ambitious = ambitious + 4;
-            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
                 content = content + 4;
                 relaxed = relaxed + 2;
-            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[9]) {
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
                 cool = cool + 4;
                 efficient = efficient + 4;
+            };
+        };
+
+        if (this.currentQuestion === 21) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
+                instinctive = instinctive + 2;
+                straightforward = straightforward + 4;
+                earnest = earnest + 2;
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
+                thoughtful = thoughtful + 2;
+                sophisticated = sophisticated + 4;
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
+                cautious = cautious + 2;
+            };
+        };
+
+        if (this.currentQuestion === 22) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
+                instinctive = instinctive + 4;
+                content = content + 2;
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
+                thoughtful = thoughtful + 2;
+                efficient = efficient + 2;
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
+                cautious = cautious + 4;
+            } else if (QuizQuestions[this.currentQuestion][4] === selectedAnswers[this.currentQuestion]) {
+                trusting = trusting + 2;
+                playful = playful + 2;
+            };
+        };
+
+        if (this.currentQuestion === 23) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
+                instinctive = instinctive + 2;
+                playful = playful + 2;
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
+                earnest = earnest + 2;
+                straightforward = straightforward + 2;
+                cautious = cautious + 4;
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
+                efficient = efficient + 4;
+            };
+        };
+
+        if (this.currentQuestion === 24) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
+                excitable = excitable + 2;
+                sensitive = sensitive + 4;
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
+                earnest = earnest + 2;
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
+                hardy = hardy + 4;
+                cool = cool + 2;
+            };
+        };
+
+        if (this.currentQuestion === 25) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
+                trusting = trusting + 2;
+                sensitive = sensitive + 2;
+                sophisticated = sophisticated + 2;
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
+                cautious = cautious + 2;
+                straightforward = straightforward + 2;
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
+                relaxed = relaxed + 4;
+                thoughtful = thoughtful + 2;
+            };
+        };
+
+        if (this.currentQuestion === 26) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
+                hardy = hardy + 4;
+                relaxed = relaxed + 4;
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
+                sensitive = sensitive + 2;
+                excitable = excitable + 4;
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
+                sophisticated = sophisticated + 4;
+            };
+        };
+
+        if (this.currentQuestion === 27) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
+                instinctive = instinctive + 2;
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
+                efficient = efficient + 2;
+                relaxed = relaxed + 2;
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
+                cautious = cautious + 2;
+            };
+        };
+
+        if (this.currentQuestion === 28) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
+                ambitious = ambitious + 2;
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
+                thoughtful = thoughtful + 4;
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
+                content = content + 2;
+            };
+        };
+
+        if (this.currentQuestion === 29) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
+                hardy = hardy + 4;
+                sophisticated = sophisticated + 2;
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
+                cool = cool + 4;
+                earnest = earnest + 2;
+            };
+        };
+
+        if (this.currentQuestion === 30) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
+                instinctive = instinctive + 2;
+                relaxed = relaxed + 2;
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
+                ambitious = ambitious + 2;
+                excitable = excitable + 2;
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
+                thoughtful = thoughtful + 4;
+            };
+        };
+
+        if (this.currentQuestion === 31) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
+                cautious = cautious + 4;
+                ambitious = ambitious + 4;
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
+                instinctive = instinctive + 4;
+                content = content + 2;
+                efficient = efficient + 2;
+            };
+        };
+
+        if (this.currentQuestion === 32) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
+                cool = cool + 4;
+                cautious = cautious + 2;
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
+                trusting = trusting + 4;
+                sophisticated = sophisticated + 2;
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
+                instinctive = instinctive + 4;
+                straightforward = straightforward + 4;
+                efficient = efficient + 2;
+            };
+        };
+
+        if (this.currentQuestion === 33) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
+                efficient = efficient + 2;
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
+                relaxed = relaxed + 2;
+                trusting = trusting + 2;
+            };
+        };
+
+        if (this.currentQuestion === 34) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
+                relaxed = relaxed + 2;
+                thoughtful = thoughtful + 4;
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
+                excitable = excitable + 2;
+                playful = playful + 2;
+            };
+        };
+
+        if (this.currentQuestion === 35) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
+                thoughtful = thoughtful + 2;
+                efficient = efficient + 2;
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
+                ambitious = ambitious + 4;
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
+                playful = playful + 4;
+            } else if (QuizQuestions[this.currentQuestion][4] === selectedAnswers[this.currentQuestion]) {
+                instinctive = instinctive + 2;
+            };
+        };
+
+        if (this.currentQuestion === 36) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
+                instinctive = instinctive + 4;
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
+                thoughtful = thoughtful + 4;
+            };
+        };
+
+        if (this.currentQuestion === 37) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
+                ambitious = ambitious + 4;
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
+                content = content + 2;
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
+                relaxed = relaxed + 2;
+                trusting = trusting + 2;
+            };
+        };
+
+        if (this.currentQuestion === 38) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
+                straightforward = straightforward + 4;
+                hardy = hardy + 2;
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
+                earnest = earnest + 2;
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
+                thoughtful = thoughtful + 2;
+                sophisticated = sophisticated + 4;
+            };
+        };
+
+        if (this.currentQuestion === 39) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
+                thoughtful = thoughtful + 4;
+                hardy = hardy + 2;
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
+                cautious = cautious + 2;
+                sensitive = sensitive + 4;
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
+                excitable = excitable + 4;
+                straightforward = straightforward + 4;
+            } else if (QuizQuestions[this.currentQuestion][4] === selectedAnswers[this.currentQuestion]) {
+                cool = cool + 4;
+            };
+        };
+
+        if (this.currentQuestion === 40) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
+                sensitive = sensitive + 4;
+                playful = playful + 4;
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
+                ambitious = ambitious + 2;
+                excitable = excitable + 2;
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
+                thoughtful = thoughtful + 4;
+                relaxed = relaxed + 2;
+            } else if (QuizQuestions[this.currentQuestion][4] === selectedAnswers[this.currentQuestion]) {
+                efficient = efficient + 2;
+            };
+        };
+
+        if (this.currentQuestion === 41) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
+                efficient = efficient + 4;
+                hardy = hardy + 4;
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
+                cool = cool + 4;
+                relaxed = relaxed + 2;
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
+                earnest = earnest + 4;
+                ambitious = ambitious + 2;
+            } else if (QuizQuestions[this.currentQuestion][4] === selectedAnswers[this.currentQuestion]) {
+                playful = playful + 4;
+            };
+        };
+
+        if (this.currentQuestion === 42) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
+                earnest = earnest + 4;
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
+                content = content + 2;
+                efficient = efficient + 2;
+            } else if (QuizQuestions[this.currentQuestion][3] === selectedAnswers[this.currentQuestion]) {
+                ambitious = ambitious + 4;
+            };
+        };
+
+        if (this.currentQuestion === 43) {
+            if (QuizQuestions[this.currentQuestion][1] === selectedAnswers[this.currentQuestion]) {
+                playful = playful + 2;
+                cool = cool + 2;
+            } else if (QuizQuestions[this.currentQuestion][2] === selectedAnswers[this.currentQuestion]) {
+                earnest = earnest + 2;
+                content = content + 2;
             };
         };
     }
 
     rangeTraits() {
-        trusting = round(map(trusting, 0, 34, 0, 100));
-        cautious = round(map(cautious, 0, 34, 100, 0));
-        instinctive = round(map(instinctive, 0, 34, 0, 100));
-        thoughtful = round(map(thoughtful, 0, 30, 10, 100));
-        straightforward = round(map(straightforward, 0, 20, 0, 100));
-        sophisticated = round(map(sophisticated, 0, 24, 4, 1), 1);
-        sensitive = round(map(sensitive, 0, 18, 1, 0.5), 1);
-        hardy = round(map(hardy, 0, 18, 360, 0));
-        ambitious = round(map(ambitious, 0, 18, 0.05, 0.25), 2);
-        content = round(map(content, 0, 24, 0, 100));
-        earnest = round(map(earnest, 0, 18, 0, 100));
-        cool = round(map(cool, 0, 24, 0, 360));
-        playful = round(map(playful, 0, 22, 50, 200));
-        efficient = round(map(efficient, 0, 18, 0, 360));
-        relaxed = round(map(relaxed, 0, 20, 0.08, 0.02), 2);
-        excitable = round(map(excitable, 0, 20, 1000, 6000));
+        trusting = round(map(trusting, 0, 46, 0, 100));
+        cautious = round(map(cautious, 0, 56, 100, 0));
+        instinctive = round(map(instinctive, 0, 60, 0, 100));
+        thoughtful = round(map(thoughtful, 0, 64, 10, 100));
+        straightforward = round(map(straightforward, 0, 42, 0, 100));
+        sophisticated = round(map(sophisticated, 0, 40, 4, 1), 1);
+        sensitive = round(map(sensitive, 0, 34, 1, 0.5), 1);
+        hardy = round(map(hardy, 0, 38, 360, 0));
+        ambitious = round(map(ambitious, 0, 42, 0.05, 0.25), 2);
+        content = round(map(content, 0, 36, 0, 100));
+        earnest = round(map(earnest, 0, 38, 0, 100));
+        cool = round(map(cool, 0, 44, 0, 360));
+        playful = round(map(playful, 0, 42, 50, 200));
+        efficient = round(map(efficient, 0, 42, 0, 360));
+        relaxed = round(map(relaxed, 0, 42, 0.08, 0.02), 2);
+        excitable = round(map(excitable, 0, 36, 1000, 6000));
     }
 }

@@ -147,6 +147,6 @@ class Ending {
     }
 
     mousePressed() {
-
+        saveGif(`aura`, 2);
     }
 }
