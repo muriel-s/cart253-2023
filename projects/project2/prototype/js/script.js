@@ -1,8 +1,41 @@
 /**
- * Project 2 Prototype
+ * Project 2
  * Muriel
+ */
+/**
+ *  ATTRIBUTIONS
  * 
- * Quiz test
+ * Tooltip workaround
+ * https://stackoverflow.com/questions/68476226/how-can-i-create-a-tooltip-on-mouse-over-in-p5js
+ * 
+ * Music
+ * https://pippinbarr.com/cart253/topics/sound/reintroducing-p5-sound.html
+ * 
+ * Quiz organization reference
+ * https://docs.google.com/spreadsheets/d/18utO_lCpWQ7iXY9wpbtxXpgmzebEI2IRjADp6IrUKZ0/view#gid=422133115
+ * 
+ * Main inspiration
+ * https://github.com/Nrosa01/pmd-quiz-online/tree/main
+ * 
+ * Organization of states
+ * https://github.com/pippinbarr/cart253/tree/main/examples/structure/oop-states/js
+ * 
+ * 2D Array
+ * https://www.freecodecamp.org/news/javascript-2d-arrays/
+ * 
+ * OOP and mousePressed()
+ * https://pippinbarr.com/cart253/topics/object-oriented-programming/object-oriented-programming-and-p5-events.html
+ * 
+ * mousePressed restricted to area
+ * https://stackoverflow.com/questions/40807945/mousepressed-within-certain-region-in-processing
+ * 
+ * Sine wave formula
+ * https://p5js.org/reference/#/p5/sin
+ * 
+ * Creating visual noise
+ * https://pippinbarr.com/cart253/activities/dodging-covid19.html
+ * 
+ * 
  */
 
 "use strict";
