@@ -7,4 +7,6 @@ The goal with this was to create a quiz that would be fun to take, that would re
 My quiz is fully written out with all details attached here.
 https://docs.google.com/spreadsheets/d/1NihEU8mWu8nbsfGYMaWuGxrZP7AeRPsXeM7X8-fXnD8/edit?usp=sharing
 
-
+The music is by my friend Philippe Estrada!
+@newusernamedropped on instagram
+philippestrada03@gmail.com
