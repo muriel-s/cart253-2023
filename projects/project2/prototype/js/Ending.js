@@ -149,7 +149,7 @@ class Ending {
     }
 
     tooltip() {
-        let tooltip = `click to save as GIF`;
+        let tooltip = `click to save as PNG`;
         let w = textWidth(tooltip);
         push();
         fill(0, 0, 80);
@@ -167,6 +167,6 @@ class Ending {
     }
 
     mousePressed() {
-        saveGif(`aura`, 2);
+        saveCanvas(`aura`, `png`);
     }
 }
