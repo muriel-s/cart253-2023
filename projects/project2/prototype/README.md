@@ -8,5 +8,5 @@ My quiz is fully written out with all details attached here.
 https://docs.google.com/spreadsheets/d/1NihEU8mWu8nbsfGYMaWuGxrZP7AeRPsXeM7X8-fXnD8/edit?usp=sharing
 
 The music is by my friend Philippe Estrada!
-@newusernamedropped on instagram
-philippestrada03@gmail.com
+@comms001 on instagram
+p_estrd@live.concordia.ca
