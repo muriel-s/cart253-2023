@@ -149,7 +149,7 @@ class Ending {
     }
 
     tooltip() {
-        let tooltip = `click to save as PNG`;
+        let tooltip = `click off-canvas to save as PNG`;
         let w = textWidth(tooltip);
         push();
         fill(0, 0, 80);
@@ -167,6 +167,8 @@ class Ending {
     }
 
     mousePressed() {
-        saveCanvas(`aura`, `png`);
+        if (mouseX < 0 || mouseX > width || mouseY < 0 || mouseY > height) {
+            saveCanvas(`aura`, `png`);
+        };
     }
 }

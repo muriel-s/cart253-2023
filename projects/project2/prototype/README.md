@@ -1,4 +1,4 @@
-# Template p5 project
+# Aura Generator
 
 This project is inspired by the Pokemon Mystery Dungeon personality quiz that assigns the player a Pokemon to play as based on their results. The game would have you take the quiz, then hold your finger down on the screen to "capture your aura" before giving you the results. When I think about this now, it obviously wasn't actually weighing my soul, but when I was a kid playing Pokemon Mystery Dungeon, it felt extremely serious.
 

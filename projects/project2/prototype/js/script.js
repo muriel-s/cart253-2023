@@ -51,7 +51,7 @@ let QuizQuestions = [
     /* 0 */[`Do you jaywalk?`, `Only if the street is quiet.`, `It's like a game to me!`, `Never!`],
     /* 1 */[`How long does it take you to fall asleep?`, `I fall asleep when I decide to.`, `... Ten minutes?`, `It's a multi-hour process.`],
     /* 2 */[`What is your studying style?`, `I prefer to study in a group!`, `I like to study a little bit every day.`, `Usually at the last minute, in a rush...`],
-    /* 3 */[`You're in the bathroom at a club and someone is crying with their friend about their recent breakup. What do you do?`, `Give them privacy.`, `Say something nice then leave.`, `Get into a deep conversation that ends with you complimenting each other before going back out to never meet again.`],
+    /* 3 */[`You're in the bathroom at a party and someone is crying with their friend about their recent breakup. What do you do?`, `Give them privacy.`, `Say something nice then leave.`, `Get into a deep conversation that ends with you complimenting each other before going back out to never meet again.`],
     /* 4 */[`You're meeting someone new, and they tell you their field of study - it sounds completely made up. What's your next question?`, `"So what jobs can you get with that?"`, `"I've never heard of that, what is it?"`, `"Do you enjoy it?"`, `"How did you even find out about that?"`],
     /* 5 */[`When you stand up too fast and get dizzy, how does it feel?`, `Ethereal.`, `Scary.`],
     /* 6 */[`Do you lie at self-checkout machines?`, `Only if I think I can get away with it.`, `I'll ring up parmesan as green beans. Who cares?`, `Never, it's not worth the risk!`, `Too much effort, I'd rather not.`],
